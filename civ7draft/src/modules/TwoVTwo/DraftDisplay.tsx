@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import '../../styles/picks.css';
 
 function DraftDisplay() {
-  const [timeRemaining, setTimeRemaining] = useState(0); //Time in seconds
+  const [timeRemaining, setTimeRemaining] = useState(5); //Time in seconds
+  const [draftInProgress, setDraftInProgress] = useState(false);
 
   const pick_stages = [
     "Blue team ban leader",
@@ -12,24 +13,32 @@ function DraftDisplay() {
   ];
 
   const beginDraft = () => {
-    setTimeRemaining(30);
+    setDraftInProgress(true);
+  }
+
+  const nextStage = () => {
+    setDraftInProgress(false);
   }
 
   useEffect(() => {
-    if (timeRemaining > 0) {
+    if (draftInProgress) {
       const countdownInterval = setInterval(() => {
         if (timeRemaining <= 0) {
           setTimeRemaining(0);
           clearInterval(countdownInterval);
+          nextStage();
           alert("Stage complete!");
+        } else {
+          setTimeRemaining(timeRemaining - 1);
         }
-
-        setTimeRemaining(timeRemaining - 1);
       }, 1000);
 
-      return () => clearInterval(countdownInterval);
+      return () => {
+        clearInterval(countdownInterval);
+        //nextStage();
+      }
     }
-  }, [timeRemaining]);
+  }, [timeRemaining, draftInProgress]);
 
   return (
     <>
