@@ -8,8 +8,10 @@ function App() {
 
   return (
     <>
-      <Leaders />
-      <Picks />
+      <div id="the_draft">
+        <Leaders />
+        <Picks />
+      </div>
     </>
   )
 }
