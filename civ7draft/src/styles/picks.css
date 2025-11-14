@@ -1,0 +1,5 @@
+#picks {
+    display: flex;
+    margin-top: auto;
+    place-items: flex-end;
+}
