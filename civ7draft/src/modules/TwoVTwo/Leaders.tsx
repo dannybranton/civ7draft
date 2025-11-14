@@ -6,7 +6,6 @@ import adaLogo from'../../assets/Leaders/Ada_Lovelace_(Civ7).png';
 import aminaLogo from'../../assets/Leaders/Amina.png';
 
 function Leaders() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
