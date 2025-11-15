@@ -1,0 +1,52 @@
+#memento_pool {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#memento_pool > img {
+    width: 100px;
+    height: 100px;
+}
+
+#memento_pool > img:hover {
+    background-color: #81888f;
+}
+
+#memento_pool > img.pickable:hover {
+    cursor: pointer;
+}
+
+#memento_pool.team-1 > img.pickable:hover {
+    background-color: #539942;
+}
+
+#memento_pool.team-2 > img.pickable:hover {
+    background-color: #398cd4;
+}
+
+#memento_pool.banning > img.pickable:hover {
+    background-color: #8c2942; /* ban color */
+}
+
+#memento_pool > img.banned {
+    background-color: #8c2942; /* ban color */
+    cursor: not-allowed;
+}
+
+#memento_pool > img.banned.housebanned {
+    background-color: #81888f; /* ban color */
+}
+
+#memento_pool > img.team1pick {
+    background-color: #539942; /* ban color */
+    cursor: not-allowed;
+}
+
+#memento_pool > img.team2pick {
+    background-color: #398cd4; /* ban color */
+    cursor: not-allowed;
+}
+
+#memento_pool > img.proposed {
+    cursor: default;
+}

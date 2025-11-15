@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import '../../styles/draft_display.css';
 
 import { default as Leaders } from './Leaders'
+import { default as Mementos } from './Mementos'
 import { default as Civilizations } from './Civilizations';
 
 import type { CIVILIZATION, LEADER, MEMENTO, Bans, DraftMeta, Picks, PROGRESS_STATUS, STAGE_SELECTION_TYPE, NOT_STARTED } from '../../interfaces/draft/draft';
@@ -169,6 +170,16 @@ function DraftDisplay() {
         team_number={derivedTeamNumber}
         banning={derivedStage.includes('ban')}
         enablePickBans={derivedPickStage[2] == 'LEADER'}
+        bans={bans}
+        picks={{team1Picks, team2Picks}}
+        proposedPickBan={proposedPickBan}
+        draftMeta={draftMeta}
+      />
+      <Mementos
+        onPickBan={onPickBan}
+        team_number={derivedTeamNumber}
+        banning={derivedStage.includes('ban')}
+        enablePickBans={derivedPickStage[2] == 'MEMENTO'}
         bans={bans}
         picks={{team1Picks, team2Picks}}
         proposedPickBan={proposedPickBan}
