@@ -10,7 +10,8 @@ const DEFAULT_TOTAL_TIME_FOR_PICK = 5;
 
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
-  const [draftStatus, setDraftStatus] = useState<PROGRESS_STATUS>("NOT_STARTED")
+  const [draftStatus, setDraftStatus] = useState<PROGRESS_STATUS>("NOT_STARTED");
+  const [proposedPickBan, setProposedPickBan] = useState("");
   const [team1Name, setTeam1Name] = useState("Green Team");
   const [team2Name, setTeam2Name] = useState("Blue Team");
   const [currentStage, setCurrentStage] = useState(0);
@@ -71,9 +72,11 @@ function DraftDisplay() {
     if (currentStage < pick_stages.length - 1){
       setCurrentStage(currentStage + 1);
       setTimeRemaining(DEFAULT_TOTAL_TIME_FOR_PICK);
+      setProposedPickBan('');
     } else {
       setDraftStatus("COMPLETED");
       setCurrentStage(0);
+      setProposedPickBan('');
     }
   }
 
@@ -97,13 +100,38 @@ function DraftDisplay() {
   }, [timeRemaining, draftStatus]);
 
   const onPickBan = (pickedId: string, teamNumber: number, banning: boolean) => {
-    switch (teamNumber) {
-      case 1:
-        banning ? setTeam1Bans(team1Bans.concat(pickedId)) : setTeam1Picks(team1Picks.concat(pickedId));
-        break;
-      case 2:
-        banning ? setTeam2Bans(team2Bans.concat(pickedId)) : setTeam2Picks(team2Picks.concat(pickedId));
-        break;
+    let newTeam1Bans = team1Bans;
+    let newTeam1Picks = team1Picks;
+    let newTeam2Bans = team2Bans;
+    let newTeam2Picks = team2Picks;
+
+    if (draftStatus == 'IN_PROGRESS'){
+      // Pick has been proposed, need to remove it if a different selection is made
+      if (proposedPickBan.length > 0){
+        switch (teamNumber) {
+          case 1:
+            banning ? newTeam1Bans = newTeam1Bans.slice(0, -1) : newTeam1Picks = newTeam1Picks.slice(0, -1);
+            break;
+          case 2:
+            banning ? newTeam2Bans = newTeam2Bans.slice(0, -1) : newTeam2Picks = newTeam2Picks.slice(0, -1);
+            break;
+        }
+      }
+      // Add the new pick either way
+      switch (teamNumber) {
+        case 1:
+          banning ? newTeam1Bans = newTeam1Bans.concat(pickedId) : newTeam1Picks = newTeam1Picks.concat(pickedId);
+          break;
+        case 2:
+          banning ? newTeam2Bans = newTeam2Bans.concat(pickedId) : newTeam2Picks = newTeam2Picks.concat(pickedId);
+          break;
+      }
+      setTeam1Bans(newTeam1Bans);
+      setTeam1Picks(newTeam1Picks);
+      setTeam2Bans(newTeam2Bans);
+      setTeam2Picks(newTeam2Picks);
+
+      setProposedPickBan(pickedId);
     }
   }
 
@@ -111,7 +139,7 @@ function DraftDisplay() {
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
   const bans: Bans = { houseBans, draftBans: team1Bans.concat(team2Bans)}
-  const draftMeta: DraftMeta = { draftStatus };
+  let draftMeta: DraftMeta = { draftStatus, proposedPickBan };
 
   return (
     <>
@@ -126,7 +154,7 @@ function DraftDisplay() {
         :
         <button onClick={() => beginDraft()}>Begin draft</button>}
       </div>
-      <Leaders
+      <Civilizations
         onPickBan={onPickBan}
         team_number={derivedTeamNumber}
         banning={derivedStage.includes('ban')}
@@ -134,7 +162,7 @@ function DraftDisplay() {
         picks={{team1Picks, team2Picks}}
         draftMeta={draftMeta}
       />
-      <Civilizations
+      <Leaders
         onPickBan={onPickBan}
         team_number={derivedTeamNumber}
         banning={derivedStage.includes('ban')}
@@ -145,6 +173,7 @@ function DraftDisplay() {
       <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
       <div>Picks Team2: {team2Picks.join(',')}</div>
+      <div>Proposed pickban: {proposedPickBan}</div>
     </>
   )
 }

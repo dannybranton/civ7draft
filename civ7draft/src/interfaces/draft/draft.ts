@@ -16,4 +16,5 @@ export type PROGRESS_STATUS = NOT_STARTED | IN_PROGRESS | PAUSED | COMPLETED
 
 export interface DraftMeta {
   draftStatus: PROGRESS_STATUS
+  proposedPickBan?: string
 }
