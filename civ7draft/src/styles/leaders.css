@@ -1,12 +1,11 @@
 #leader_pool {
     display: flex;
+    flex-flow: row wrap;
 }
 
 #leader_pool > img {
     width: 100px;
-    flex: 1 1 auto;
-    min-width: 100px;
-    max-width: 200px;
+    height: 100px;
 }
 
 #leader_pool > img:hover {
