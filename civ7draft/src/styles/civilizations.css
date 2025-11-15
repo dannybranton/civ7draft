@@ -6,15 +6,13 @@
 #civ_pool > img {
     width: 100px;
     height: 100px;
-}
-
-#civ_pool > img:hover {
-    border: 5px solid gray;
-    box-sizing: border-box;
+    margin: 8px;
 }
 
 #civ_pool > img.pickable:hover {
+    border: 6px solid gray;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 #civ_pool.team-1 > img.pickable:hover {
@@ -31,22 +29,19 @@
 
 #civ_pool > img.banned {
     cursor: not-allowed;
-    border: 5px solid #8c2942;
-    box-sizing: border-box;
+    border-bottom: 16px solid #8c2942;
 }
 
 #civ_pool > img.banned.housebanned {
-    border: 5px solid #81888f;
+    border-color: #81888f;
 }
 
 #civ_pool > img.team1pick {
     cursor: not-allowed;
-    border: 5px solid #539942;
-    box-sizing: border-box;
+    border-bottom: 16px solid #539942;
 }
 
 #civ_pool > img.team2pick {
     cursor: not-allowed;
-    border: 5px solid #398cd4;
-    box-sizing: border-box;
+    border-bottom: 16px solid #398cd4;
 }
