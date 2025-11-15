@@ -2,7 +2,6 @@ import { useState } from 'react'
 import '../../styles/picks.css';
 
 function Picks() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
