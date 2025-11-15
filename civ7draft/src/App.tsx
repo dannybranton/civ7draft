@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 
-import { DraftDisplay, Leaders, Picks } from './modules/TwoVTwo';
+import { DraftDisplay, Picks } from './modules/TwoVTwo';
 //import { default as Sheets } from './Sheets';
 
 function App() {
@@ -11,7 +11,6 @@ function App() {
       {/* <Sheets></Sheets> */}
       <div id="the_draft">
         <DraftDisplay />
-        <Leaders />
         <Picks />
       </div>
     </>
