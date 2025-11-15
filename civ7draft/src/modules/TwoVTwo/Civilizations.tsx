@@ -15,25 +15,36 @@ import roman from '../../assets/Civilizations/Roman_29.webp';
 import silla from '../../assets/Civilizations/Silla_29.webp';
 import tongan from '../../assets/Civilizations/Tongan_29.webp';
 
-function Civilizations({team_number = 0, banning = false}) {
+interface CivilizationsProps {
+  team_number: number,
+  banning: boolean,
+  onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
+}
+
+const Civilizations = ({team_number = 0, banning = false, onPickBan}: CivilizationsProps) => {
+
+  const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    const element = event.target as HTMLImageElement;
+    onPickBan(element.id, team_number, banning);
+  }
 
   return (
     <>
-      <div id='leader_pool' className={`team-${team_number} ${banning ? 'banning' : ''}`}>
-        <img src={ achaemenidPersia }></img>
-        <img src={ aksumite }></img>
-        <img src={ assyrian }></img>
-        <img src={ carthaginian }></img>
-        <img src={ egyptian }></img>
-        <img src={ greek }></img>
-        <img src={ han }></img>
-        <img src={ khmer }></img>
-        <img src={ mauryan }></img>
-        <img src={ maya }></img>
-        <img src={ miss }></img>
-        <img src={ roman }></img>
-        <img src={ silla }></img>
-        <img src={ tongan }></img>
+      <div id='civ_pool' className={`team-${team_number} ${banning ? 'banning' : ''}`}>
+        <img id='achaemenidPersia' src={ achaemenidPersia } onClick={handleClick}></img>
+        <img id="aksumite" src={ aksumite } onClick={handleClick}></img>
+        <img id="assyrian"  src={ assyrian } onClick={handleClick}></img>
+        <img id="carthaginian"  src={ carthaginian } onClick={handleClick}></img>
+        <img id="egyptian"  src={ egyptian } onClick={handleClick}></img>
+        <img id="greek"  src={ greek } onClick={handleClick}></img>
+        <img id="han"  src={ han } onClick={handleClick}></img>
+        <img id="khmer"  src={ khmer } onClick={handleClick}></img>
+        <img id="mauryan"  src={ mauryan } onClick={handleClick}></img>
+        <img id="maya"  src={ maya } onClick={handleClick}></img>
+        <img id="miss"  src={ miss } onClick={handleClick}></img>
+        <img id="roman"  src={ roman } onClick={handleClick}></img>
+        <img id="silla"  src={ silla } onClick={handleClick}></img>
+        <img id="tongan"  src={ tongan } onClick={handleClick}></img>
 
       </div>
     </>

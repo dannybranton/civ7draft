@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import '../../styles/draft_display.css';
 
 import { default as Leaders } from './Leaders'
@@ -12,10 +12,6 @@ const CHOICES = {
 
 const DEFAULT_TOTAL_TIME_FOR_PICK = 7;
 
-const DraftContext = createContext({
-  pick: CHOICES.GREEN_PICK
-});
-
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
   const [draftInProgress, setDraftInProgress] = useState(false);
@@ -23,6 +19,11 @@ function DraftDisplay() {
   const [team2Name, setTeam2Name] = useState("Blue Team");
   const [choiceType, setChoiceType] = useState(CHOICES.BAN);
   const [currentStage, setCurrentStage] = useState(0);
+
+  const [team1Bans, setTeam1Bans] = useState<string[]>([]);
+  const [team1Picks, setTeam1Picks] = useState<string[]>([]);
+  const [team2Bans, setTeam2Bans] = useState<string[]>([]);
+  const [team2Picks, setTeam2Picks] = useState<string[]>([]);
 
   // Team 1 is Green Team, Team 2 is Blue Team
   const civilization_pick_stages = [
@@ -54,10 +55,6 @@ function DraftDisplay() {
   ];
 
   const pick_stages = [ ...civilization_pick_stages, ...memento_ban_1, ...leader_pick_stages, ...memento_ban_2 ];
-
-  const stage1 = pick_stages[1];
-  const teamName11 = stage1[0] as number;
-
 
   const beginDraft = () => {
     setDraftInProgress(true);
@@ -92,6 +89,18 @@ function DraftDisplay() {
     }
   }, [timeRemaining, draftInProgress]);
 
+  const onPickBan = (pickedId: string, teamNumber: number, banning: boolean) => {
+    switch (teamNumber) {
+      case 1:
+        banning ? setTeam1Bans(team1Bans.concat(pickedId)) : setTeam1Picks(team1Picks.concat(pickedId));
+        break;
+      case 2:
+        banning ? setTeam2Bans(team2Bans.concat(pickedId)) : setTeam2Picks(team2Picks.concat(pickedId));
+        break;
+    }
+    console.log('onPickBand completed');
+  }
+
   const derivedPickStage = pick_stages[currentStage];
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
@@ -109,13 +118,15 @@ function DraftDisplay() {
         :
         <button onClick={() => beginDraft()}>Begin draft</button>}
       </div>
-      <Leaders team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
-      <Civilizations team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
+      <Leaders onPickBan={onPickBan} team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
+      <Civilizations onPickBan={onPickBan} team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
+      <div>Picks Team1: {team1Picks.join(',')}</div>
+      <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
+      <div>Picks Team2: {team2Picks.join(',')}</div>
     </>
   )
 }
 
 export {
-  DraftContext,
   DraftDisplay
 }

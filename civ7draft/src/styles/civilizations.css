@@ -10,16 +10,22 @@
 
 #civ_pool > img:hover {
     cursor: pointer;
+    border: 5px solid gray;
+    box-sizing: border-box;
 }
 
 #civ_pool.team-1 > img:hover {
-    background-color: #539942;
+    border-color: #539942;
 }
 
 #civ_pool.team-2 > img:hover {
-    background-color: #398cd4; /* pick color */
+    border-color: #398cd4; /* pick color */
 }
 
 #civ_pool.banning > img:hover {
-    background-color: #8c2942; /* ban color */
+    border-color: #8c2942; /* ban color */
+}
+
+#civ_pool.banned > img {
+    border-color: #8c2942; /* ban color */
 }
