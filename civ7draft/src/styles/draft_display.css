@@ -1,26 +1,31 @@
 #draft_display {
     display: flex;
     place-content: center;
-    font-size: 18px;
+    align-items: center;
+    font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
+
+    height: 50px;
+    background: #81888f;
 }
 
 .stage_prompt {
     display: flex;
     place-content: center;
     color: white;
-    height: 100px;
     width: 100vw;
 }
 
-.stage_prompt > p {
-    padding: 16px;
-}
-
 .stage_prompt.team-1 {
-    background-color: #5cbf8f; /* pick color */
+    background-color: #539942;
 }
 
 .stage_prompt.team-2 {
     background-color: #398cd4; /* pick color */
+}
+
+.timer {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 4px 24px 0 24px;
 }

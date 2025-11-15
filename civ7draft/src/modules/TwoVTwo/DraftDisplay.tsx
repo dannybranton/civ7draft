@@ -9,14 +9,14 @@ const CHOICES = {
   BLUE_PICK: 'bluepick'
 }
 
-const DEFAULT_TOTAL_TIME_FOR_PICK = 5;
+const DEFAULT_TOTAL_TIME_FOR_PICK = 7;
 
 const DraftContext = createContext({
   pick: CHOICES.GREEN_PICK
 });
 
 function DraftDisplay() {
-  const [timeRemaining, setTimeRemaining] = useState(5); //Time in seconds
+  const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
   const [draftInProgress, setDraftInProgress] = useState(false);
   const [team1Name, setTeam1Name] = useState("Green Team");
   const [team2Name, setTeam2Name] = useState("Blue Team");
@@ -102,13 +102,11 @@ function DraftDisplay() {
         <div>
           <div className={`stage_prompt team-${derivedTeamNumber}`}>
             <p>{derivedStage}</p>
+            <p className='timer'>{timeRemaining}</p>
           </div>
-          <div>Time remaining: {timeRemaining}</div>
         </div>
         :
         <button onClick={() => beginDraft()}>Begin draft</button>}
-        
-        
       </div>
       <Leaders team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
     </>
