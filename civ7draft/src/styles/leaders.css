@@ -12,22 +12,12 @@
     cursor: pointer;
 }
 
-#leader_pool.team-1 > img:hover {
+#leader_pool.team-1 > img.pickable:hover {
     background-color: #539942;
 }
 
-#leader_pool.team-2 > img:hover {
+#leader_pool.team-2 > img.pickable:hover {
     background-color: #398cd4;
-}
-
-/* Team 1 picking, but Team 2 has already picked this one */
-#leader_pool.team-1 > img.team2pick:hover { 
-    background-color: #398cd4;
-}
-
-/* Team 2 picking, but Team 1 has already picked this one */
-#leader_pool.team-2 > img.team1pick:hover {
-    background-color: #539942; /* pick color */
 }
 
 #leader_pool.banning > img:hover {
@@ -39,7 +29,7 @@
     cursor: not-allowed;
 }
 
-#leader_pool > img.banned.house {
+#leader_pool > img.banned.housebanned {
     background-color: #81888f; /* ban color */
 }
 

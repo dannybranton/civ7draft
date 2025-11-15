@@ -4,13 +4,13 @@ import '../../styles/draft_display.css';
 import { default as Leaders } from './Leaders'
 import { default as Civilizations } from './Civilizations';
 
-import type { Bans, Picks } from '../../interfaces/draft/draft';
+import type { Bans, draftMeta, Picks, PROGRESS_STATUS, NOT_STARTED } from '../../interfaces/draft/draft';
 
 const DEFAULT_TOTAL_TIME_FOR_PICK = 5;
 
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
-  const [draftInProgress, setDraftInProgress] = useState(false);
+  const [draftStatus, setDraftStatus] = useState<PROGRESS_STATUS>("NOT_STARTED")
   const [team1Name, setTeam1Name] = useState("Green Team");
   const [team2Name, setTeam2Name] = useState("Blue Team");
   const [currentStage, setCurrentStage] = useState(0);
@@ -64,7 +64,7 @@ function DraftDisplay() {
   const pick_stages = [ ...civilization_pick_stages, ...memento_ban_1, ...leader_pick_stages, ...memento_ban_2 ];
 
   const beginDraft = () => {
-    setDraftInProgress(true);
+    setDraftStatus("IN_PROGRESS");
   }
 
   const nextStage = () => {
@@ -72,13 +72,13 @@ function DraftDisplay() {
       setCurrentStage(currentStage + 1);
       setTimeRemaining(DEFAULT_TOTAL_TIME_FOR_PICK);
     } else {
-      setDraftInProgress(false);
+      setDraftStatus("COMPLETED");
       setCurrentStage(0);
     }
   }
 
   useEffect(() => {
-    if (draftInProgress) {
+    if (draftStatus == 'IN_PROGRESS') {
       const countdownInterval = setInterval(() => {
         if (timeRemaining <= 0) {
           setTimeRemaining(0);
@@ -94,7 +94,7 @@ function DraftDisplay() {
         //nextStage();
       }
     }
-  }, [timeRemaining, draftInProgress]);
+  }, [timeRemaining, draftStatus]);
 
   const onPickBan = (pickedId: string, teamNumber: number, banning: boolean) => {
     switch (teamNumber) {
@@ -110,13 +110,12 @@ function DraftDisplay() {
   const derivedPickStage = pick_stages[currentStage];
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
-  //const derivedBans = team1Bans.concat(team2Bans).concat(houseBans);
   const bans: Bans = { houseBans, draftBans: team1Bans.concat(team2Bans)}
 
   return (
     <>
       <div id="draft_display">
-        {draftInProgress ?
+        {draftStatus == 'IN_PROGRESS' ?
         <div>
           <div className={`stage_prompt team-${derivedTeamNumber}`}>
             <p>{derivedStage}</p>
