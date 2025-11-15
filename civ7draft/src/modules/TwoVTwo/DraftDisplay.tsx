@@ -22,8 +22,6 @@ function DraftDisplay() {
   const [team2Bans, setTeam2Bans] = useState<string[]>([]);
   const [team2Picks, setTeam2Picks] = useState<string[]>([]);
 
-  const [choiceMadeForCurrentStage, setChoiceMadeForCurrentStage] = useState(false);
-
   const houseBans: string[] = [
     'lafayette',
     'napoleonemperor',
@@ -81,15 +79,33 @@ function DraftDisplay() {
     }
   }
 
+  const pauseDraft = () => {
+    setDraftStatus('PAUSED');
+  }
+
+  const resumeDraft = () => {
+    setDraftStatus('IN_PROGRESS');
+  }
+
+  const restartDraft = () => {
+    setDraftStatus('NOT_STARTED');
+    setTeam1Bans([]);
+    setTeam1Picks([]);
+    setTeam2Bans([]);
+    setTeam2Picks([]);
+  }
+
   useEffect(() => {
-    if (draftStatus == 'IN_PROGRESS') {
+    if (draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') {
       const countdownInterval = setInterval(() => {
         if (timeRemaining <= 0) {
           setTimeRemaining(0);
           clearInterval(countdownInterval);
           nextStage();
         } else {
-          setTimeRemaining(timeRemaining - 1);
+          if (draftStatus == 'IN_PROGRESS') {
+            setTimeRemaining(timeRemaining - 1);
+          }
         }
       }, 1000);
 
@@ -136,24 +152,58 @@ function DraftDisplay() {
     }
   }
 
+  const DraftButton = () => {
+    let buttonAction = () => {};
+    let buttonText = "";
+    let buttonClass = "";
+
+    switch (draftStatus) {
+      case 'NOT_STARTED':
+        buttonAction = () => beginDraft();
+        buttonText = "Begin draft";
+        break;
+      case 'IN_PROGRESS':
+        buttonClass = 'pause'
+        buttonAction = () => pauseDraft();
+        buttonText = "Pause draft";
+        break;
+      case 'PAUSED':
+        buttonClass = 'resume';
+        buttonAction = () => resumeDraft();
+        buttonText = "Resume draft";
+        break;
+      case 'COMPLETED':
+        buttonClass = 'restart';
+        buttonAction = () => restartDraft();
+        buttonText = "Restart draft";
+        break;
+    }
+
+    return <>
+      <button className={`draft_button ${buttonClass}`} onClick={buttonAction}>{buttonText}</button>
+    </>
+  }
+
   const derivedPickStage = pick_stages[currentStage];
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
   const bans: Bans = { houseBans, draftBans: team1Bans.concat(team2Bans)}
-  let draftMeta: DraftMeta = { draftStatus, proposedPickBan };
+  const draftMeta: DraftMeta = { draftStatus, proposedPickBan };
 
   return (
     <>
-      <div id="draft_display">
-        {draftStatus == 'IN_PROGRESS' ?
-        <div>
-          <div className={`stage_prompt team-${derivedTeamNumber}`}>
-            <p>{derivedStage}</p>
-            <p className='timer'>{timeRemaining}</p>
+      <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
+        {(draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') &&
+          <div>
+            <div className={`stage_prompt team-${derivedTeamNumber}`}>
+              
+              <p>{derivedStage}</p>
+              <p className='timer'>{timeRemaining}</p>
+            </div>
           </div>
-        </div>
-        :
-        <button onClick={() => beginDraft()}>Begin draft</button>}
+        }
+        {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
+        <DraftButton />
       </div>
       <Civilizations
         onPickBan={onPickBan}

@@ -13,6 +13,11 @@
     background: #81888f;
 }
 
+#draft_display.completed {
+    background: #18c7bb;
+    color: white;
+}
+
 .stage_prompt {
     display: flex;
     place-content: center;
@@ -32,4 +37,16 @@
     font-size: 32px;
     font-weight: 600;
     margin: 4px 24px 0 24px;
+}
+
+.draft_button.pause {
+    position: fixed;
+    right: 0;
+    margin: 9px 8px 8px 8px;
+}
+
+.draft_button.resume, .draft_button.pause, .draft_button.restart {
+    position: fixed;
+    right: 0;
+    margin: 9px 8px 8px 8px;
 }
