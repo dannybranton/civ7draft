@@ -31,7 +31,7 @@ import dellarte from '../../assets/Mementos/Chalcedony_Seal_29.webp';
 import dhal from '../../assets/Mementos/Chanda-mahasena_29.webp';
 import diamond from '../../assets/Mementos/Clipeus_Virtutis_29.webp';
 import discorsi from '../../assets/Mementos/Colada_28Civ7.webp';
-import dongson from '../../assets/Mementos/dong-n28Civ7.webp';
+import dongson from '../../assets/Mementos/Dong_Son_Drum_(Civ7).png';
 import dotaku from '../../assets/Mementos/Corona_Civica_29.webp';
 import eagle from '../../assets/Mementos/Eagle_Banner_(Civ7).png';
 import equestrian from '../../assets/Mementos/Equestrian_Figure_(Civ7).png';
@@ -68,10 +68,10 @@ import letter from '../../assets/Mementos/Letter_to_Adrienne_29.webp';
 import letterjamaica from '../../assets/Mementos/Letter_to_Jamaica_29.webp';
 import lion from '../../assets/Mementos/Lion_Capital_29.webp';
 import lotus from '../../assets/Mementos/Lotus_Blossom_29.webp';
-import lydian from '../../assets/Mementos/Lydian_Lion_29.webp';
+import lydian from '../../assets/Mementos/Merchant28Civ7.webp';
 import mascapaycha from '../../assets/Mementos/Mascapaycha_29.webp';
 import medicine from '../../assets/Mementos/Medicine_Chest_29.webp';
-import merchant from '../../assets/merchant/Colada_28Civ7.webp';
+import merchant from '../../assets/Mementos/Merchant28Civ7.webp';
 import noli from '../../assets/Mementos/Noli_Me_T28Civ7.webp';
 import noteg from '../../assets/Mementos/Note_G_(Civ7).png';
 import ophthalmoscope from '../../assets/Mementos/Ophthalmoscope_29.webp';
@@ -200,7 +200,6 @@ const Mementos = ({
         <img id="goldensceptre" title="Golden Sceptre" src={ goldensceptre } onClick={handleClick} className={getClasses('goldensceptre')}></img>
         <img id="goldenseal" title="Golden Seal Stone" src={ goldenseal } onClick={handleClick} className={getClasses('goldenseal')}></img>
         <img id="greatimperial" title="Great Imperial Crown" src={ greatimperial } onClick={handleClick} className={getClasses('greatimperial')}></img>
-        
         <img id="greencolonel" title="Green Colonel's Jacket" src={ greencolonel } onClick={handleClick} className={getClasses('greencolonel')}></img>
         <img id="groma" title="Groma" src={ groma } onClick={handleClick} className={getClasses('groma')}></img>
         <img id="hermione" title="Hermione Model" src={ hermione } onClick={handleClick} className={getClasses('hermione')}></img>
