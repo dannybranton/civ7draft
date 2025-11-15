@@ -1,4 +1,8 @@
 #draft_display {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
     display: flex;
     place-content: center;
     align-items: center;
