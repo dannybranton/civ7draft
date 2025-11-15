@@ -1,5 +1,8 @@
 import '../../styles/civilizations.css';
 
+import type { Bans, Picks } from '../../interfaces/draft/draft';
+import { pickBanClasses } from '../../utilities/draft/draft';
+
 import achaemenidPersia from '../../assets/Civilizations/Achaemenid_Persian_29.webp';
 import aksumite from '../../assets/Civilizations/Aksumite_29.webp';
 import assyrian from '../../assets/Civilizations/Assyrian_29.webp';
@@ -16,15 +19,14 @@ import silla from '../../assets/Civilizations/Silla_29.webp';
 import tongan from '../../assets/Civilizations/Tongan_29.webp';
 
 interface CivilizationsProps {
-  bans: string[];
-  team1Picks: string[];
-  team2Picks: string[];
+  bans: Bans;
+  picks: Picks;
   team_number: number,
   banning: boolean,
   onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
 }
 
-const Civilizations = ({team_number = 0, banning = false, onPickBan, bans, team1Picks, team2Picks}: CivilizationsProps) => {
+const Civilizations = ({team_number = 0, banning = false, onPickBan, bans, picks}: CivilizationsProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     const element = event.target as HTMLImageElement;
@@ -32,10 +34,7 @@ const Civilizations = ({team_number = 0, banning = false, onPickBan, bans, team1
   }
   
   const getClasses = (id: string): string => {
-    let classes = bans.includes(id) ? 'banned' : '';
-    classes = team1Picks.includes(id) ? classes + 'team1pick' : classes;
-    classes = team2Picks.includes(id) ? classes + 'team2pick' : classes;
-    return classes;
+    return pickBanClasses(id, picks, bans, '');
   }
 
   return (

@@ -4,6 +4,8 @@ import '../../styles/draft_display.css';
 import { default as Leaders } from './Leaders'
 import { default as Civilizations } from './Civilizations';
 
+import type { Bans, Picks } from '../../interfaces/draft/draft';
+
 const DEFAULT_TOTAL_TIME_FOR_PICK = 5;
 
 function DraftDisplay() {
@@ -108,7 +110,8 @@ function DraftDisplay() {
   const derivedPickStage = pick_stages[currentStage];
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
-  const derivedAllBans = team1Bans.concat(team2Bans).concat(houseBans);
+  //const derivedBans = team1Bans.concat(team2Bans).concat(houseBans);
+  const bans: Bans = { houseBans, draftBans: team1Bans.concat(team2Bans)}
 
   return (
     <>
@@ -127,17 +130,15 @@ function DraftDisplay() {
         onPickBan={onPickBan}
         team_number={derivedTeamNumber}
         banning={derivedStage.includes('ban')}
-        bans={derivedAllBans}
-        team1Picks={team1Picks}
-        team2Picks={team2Picks}
+        bans={bans}
+        picks={{team1Picks, team2Picks}}
       />
       <Civilizations
         onPickBan={onPickBan}
         team_number={derivedTeamNumber}
         banning={derivedStage.includes('ban')}
-        bans={derivedAllBans}
-        team1Picks={team1Picks}
-        team2Picks={team2Picks}
+        bans={bans}
+        picks={{team1Picks, team2Picks}}
       />
       <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>

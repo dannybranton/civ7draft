@@ -36,6 +36,13 @@
     border-color: #8c2942;
 }
 
+#civ_pool > img.banned.housebanned:hover {
+    border-color: #81888f;
+}
+
+#civ_pool > img.banned {
+    cursor: not-allowed;
+}
 
 #civ_pool.banning > img:hover {
     border-color: #8c2942; /* ban color */
@@ -45,6 +52,10 @@
     cursor: not-allowed;
     border: 5px solid #8c2942;
     box-sizing: border-box;
+}
+
+#civ_pool > img.banned.housebanned {
+    border: 5px solid #81888f;
 }
 
 #civ_pool > img.team1pick {
