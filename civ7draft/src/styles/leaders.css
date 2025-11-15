@@ -46,3 +46,7 @@
     background-color: #398cd4; /* ban color */
     cursor: not-allowed;
 }
+
+#leader_pool > img.proposed {
+    cursor: default;
+}

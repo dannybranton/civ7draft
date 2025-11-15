@@ -1,7 +1,7 @@
 import '../../styles/leaders.css';
 
 import type { DraftMeta, Bans, Picks } from '../../interfaces/draft/draft';
-import { pickBanClasses } from '../../utilities/draft/draft';
+import { isPickable, pickBanClasses } from '../../utilities/draft/draft';
 
 import adaLogo from '../../assets/Leaders/Ada_Lovelace_(Civ7).png';
 import aminaLogo from '../../assets/Leaders/Amina.png';
@@ -40,23 +40,26 @@ interface ILeadersProps {
   bans: Bans;
   enablePickBans: boolean;
   picks: Picks;
+  proposedPickBan: string;
   draftMeta: DraftMeta;
   team_number: number,
   banning: boolean,
   onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
 }
 
-const Leaders = ({team_number = 0, banning = false, enablePickBans = false, onPickBan, bans, picks, draftMeta}: ILeadersProps) => {
+const Leaders = ({team_number = 0, banning = false, enablePickBans = false, onPickBan, bans, picks, proposedPickBan, draftMeta}: ILeadersProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     if (enablePickBans) {
       const element = event.target as HTMLImageElement;
-      onPickBan(element.id, team_number, banning);
+      if (isPickable(element.id, picks, bans, draftMeta)) {
+        onPickBan(element.id, team_number, banning);
+      }
     }
   }
 
   const getClasses = (id: string): string => {
-    return pickBanClasses(id, picks, bans, draftMeta, enablePickBans, '');
+    return pickBanClasses(id, picks, bans, draftMeta, enablePickBans, proposedPickBan, '');
   }
 
   return (

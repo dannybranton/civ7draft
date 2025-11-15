@@ -161,6 +161,7 @@ function DraftDisplay() {
         enablePickBans={derivedPickStage[2] == 'CIVILIZATION'}
         bans={bans}
         picks={{team1Picks, team2Picks}}
+        proposedPickBan={proposedPickBan}
         draftMeta={draftMeta}
       />
       <Leaders
@@ -170,6 +171,7 @@ function DraftDisplay() {
         enablePickBans={derivedPickStage[2] == 'LEADER'}
         bans={bans}
         picks={{team1Picks, team2Picks}}
+        proposedPickBan={proposedPickBan}
         draftMeta={draftMeta}
       />
       <div>Picks Team1: {team1Picks.join(',')}</div>

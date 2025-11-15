@@ -54,3 +54,7 @@
     border-bottom: 16px solid #398cd4;
     box-sizing: content-box;
 }
+
+#civ_pool > img.proposed {
+    cursor: default;
+}

@@ -1,7 +1,7 @@
 import '../../styles/civilizations.css';
 
 import type { DraftMeta, Bans, Picks } from '../../interfaces/draft/draft';
-import { pickBanClasses } from '../../utilities/draft/draft';
+import { isPickable, pickBanClasses } from '../../utilities/draft/draft';
 
 import achaemenidPersia from '../../assets/Civilizations/Achaemenid_Persian_29.webp';
 import aksumite from '../../assets/Civilizations/Aksumite_29.webp';
@@ -22,24 +22,35 @@ interface CivilizationsProps {
   bans: Bans;
   enablePickBans: boolean;
   picks: Picks;
+  proposedPickBan: string;
   draftMeta: DraftMeta;
   team_number: number,
   banning: boolean,
   onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
 }
 
-const Civilizations = ({team_number = 0, banning = false, enablePickBans = false, onPickBan, bans, picks, draftMeta}: CivilizationsProps) => {
+const Civilizations = ({
+    team_number = 0,
+    banning = false,
+    enablePickBans = false,
+    onPickBan,
+    bans,
+    picks,
+    proposedPickBan,
+    draftMeta
+  }: CivilizationsProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-    console.log('enablePickBans: ' + enablePickBans);
     if (enablePickBans){
       const element = event.target as HTMLImageElement;
-      onPickBan(element.id, team_number, banning);
+      if (isPickable(element.id, picks, bans, draftMeta)) {
+        onPickBan(element.id, team_number, banning);
+      }
     }
   }
   
   const getClasses = (id: string): string => {
-    return pickBanClasses(id, picks, bans, draftMeta, enablePickBans, '');
+    return pickBanClasses(id, picks, bans, draftMeta, enablePickBans, proposedPickBan, '');
   }
 
   return (
