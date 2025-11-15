@@ -142,9 +142,13 @@ function DraftDisplay() {
       switch (teamNumber) {
         case 1:
           banning ? newTeam1Bans = newTeam1Bans.concat(pickedId) : newTeam1Picks = newTeam1Picks.concat(pickedId);
+          if (banning && pickedId == 'sulde') newTeam1Bans = newTeam1Bans.concat('artilleryman');
+          if (banning && pickedId == 'artilleryman') newTeam1Bans = newTeam1Bans.concat('sulde');
           break;
         case 2:
           banning ? newTeam2Bans = newTeam2Bans.concat(pickedId) : newTeam2Picks = newTeam2Picks.concat(pickedId);
+          if (banning && pickedId == 'sulde') newTeam2Bans = newTeam2Bans.concat('artilleryman');
+          if (banning && pickedId == 'artilleryman') newTeam2Bans = newTeam2Bans.concat('sulde');
           break;
       }
       setTeam1Bans(newTeam1Bans);
