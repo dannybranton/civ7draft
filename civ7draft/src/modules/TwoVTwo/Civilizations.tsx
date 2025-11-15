@@ -1,6 +1,6 @@
 import '../../styles/civilizations.css';
 
-import type { Bans, Picks } from '../../interfaces/draft/draft';
+import type { DraftMeta, Bans, Picks } from '../../interfaces/draft/draft';
 import { pickBanClasses } from '../../utilities/draft/draft';
 
 import achaemenidPersia from '../../assets/Civilizations/Achaemenid_Persian_29.webp';
@@ -21,12 +21,13 @@ import tongan from '../../assets/Civilizations/Tongan_29.webp';
 interface CivilizationsProps {
   bans: Bans;
   picks: Picks;
+  draftMeta: DraftMeta;
   team_number: number,
   banning: boolean,
   onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
 }
 
-const Civilizations = ({team_number = 0, banning = false, onPickBan, bans, picks}: CivilizationsProps) => {
+const Civilizations = ({team_number = 0, banning = false, onPickBan, bans, picks, draftMeta}: CivilizationsProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     const element = event.target as HTMLImageElement;
@@ -34,7 +35,7 @@ const Civilizations = ({team_number = 0, banning = false, onPickBan, bans, picks
   }
   
   const getClasses = (id: string): string => {
-    return pickBanClasses(id, picks, bans, '');
+    return pickBanClasses(id, picks, bans, draftMeta, '');
   }
 
   return (

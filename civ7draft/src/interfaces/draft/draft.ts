@@ -14,6 +14,6 @@ export type IN_PROGRESS = 'IN_PROGRESS'
 export type PAUSED = 'PAUSED'
 export type PROGRESS_STATUS = NOT_STARTED | IN_PROGRESS | PAUSED | COMPLETED
 
-export interface draftMeta {
+export interface DraftMeta {
   draftStatus: PROGRESS_STATUS
 }

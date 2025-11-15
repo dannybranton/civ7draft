@@ -9,6 +9,10 @@
 }
 
 #leader_pool > img:hover {
+    background-color: #81888f;
+}
+
+#leader_pool > img.pickable:hover {
     cursor: pointer;
 }
 
@@ -20,7 +24,7 @@
     background-color: #398cd4;
 }
 
-#leader_pool.banning > img:hover {
+#leader_pool.banning > img.pickable:hover {
     background-color: #8c2942; /* ban color */
 }
 

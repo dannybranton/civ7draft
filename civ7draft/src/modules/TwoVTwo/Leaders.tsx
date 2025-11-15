@@ -1,6 +1,7 @@
 import '../../styles/leaders.css';
 
-import type { Bans, Picks } from '../../interfaces/draft/draft';
+import type { DraftMeta, Bans, Picks } from '../../interfaces/draft/draft';
+import { pickBanClasses } from '../../utilities/draft/draft';
 
 import adaLogo from '../../assets/Leaders/Ada_Lovelace_(Civ7).png';
 import aminaLogo from '../../assets/Leaders/Amina.png';
@@ -38,12 +39,13 @@ import xerxesAchaemenid from '../../assets/Leaders/Xerxes,_the_Achaemenid_(Civ7)
 interface ILeadersProps {
   bans: Bans;
   picks: Picks;
+  draftMeta: DraftMeta;
   team_number: number,
   banning: boolean,
   onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
 }
 
-const Leaders = ({team_number = 0, banning = false, onPickBan, bans, picks}: ILeadersProps) => {
+const Leaders = ({team_number = 0, banning = false, onPickBan, bans, picks, draftMeta}: ILeadersProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     const element = event.target as HTMLImageElement;
@@ -51,11 +53,7 @@ const Leaders = ({team_number = 0, banning = false, onPickBan, bans, picks}: ILe
   }
 
   const getClasses = (id: string): string => {
-    let classes = bans.draftBans.includes(id) ? 'banned' : '';
-    classes = bans.houseBans.includes(id) ? 'banned housebanned' : '';
-    classes = picks.team1Picks.includes(id) ? classes + 'team1pick' : classes;
-    classes = picks.team2Picks.includes(id) ? classes + 'team2pick' : classes;
-    return classes;
+    return pickBanClasses(id, picks, bans, draftMeta, '');
   }
 
   return (

@@ -9,9 +9,12 @@
 }
 
 #civ_pool > img:hover {
-    cursor: pointer;
     border: 5px solid gray;
     box-sizing: border-box;
+}
+
+#civ_pool > img.pickable:hover {
+    cursor: pointer;
 }
 
 #civ_pool.team-1 > img.pickable:hover {
