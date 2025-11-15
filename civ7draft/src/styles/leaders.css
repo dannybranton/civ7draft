@@ -24,6 +24,17 @@
     background-color: #8c2942; /* ban color */
 }
 
-#leader_pool.banned > img {
+#leader_pool > img.banned {
     background-color: #8c2942; /* ban color */
+    cursor: not-allowed;
+}
+
+#leader_pool > img.team1pick {
+    background-color: #539942; /* ban color */
+    cursor: not-allowed;
+}
+
+#leader_pool > img.team2pick {
+    background-color: #398cd4; /* ban color */
+    cursor: not-allowed;
 }

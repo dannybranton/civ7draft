@@ -4,26 +4,29 @@ import '../../styles/draft_display.css';
 import { default as Leaders } from './Leaders'
 import { default as Civilizations } from './Civilizations';
 
-const CHOICES = {
-  BAN: 'ban',
-  GREEN_PICK: 'greenpick',
-  BLUE_PICK: 'bluepick'
-}
-
-const DEFAULT_TOTAL_TIME_FOR_PICK = 7;
+const DEFAULT_TOTAL_TIME_FOR_PICK = 5;
 
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
   const [draftInProgress, setDraftInProgress] = useState(false);
   const [team1Name, setTeam1Name] = useState("Green Team");
   const [team2Name, setTeam2Name] = useState("Blue Team");
-  const [choiceType, setChoiceType] = useState(CHOICES.BAN);
   const [currentStage, setCurrentStage] = useState(0);
 
   const [team1Bans, setTeam1Bans] = useState<string[]>([]);
   const [team1Picks, setTeam1Picks] = useState<string[]>([]);
   const [team2Bans, setTeam2Bans] = useState<string[]>([]);
   const [team2Picks, setTeam2Picks] = useState<string[]>([]);
+
+  const houseBans: string[] = [
+    'lafayette',
+    'napoleonemperor',
+    'harriet',
+    'miss',
+    'ming',
+    'egyptian',
+    'qajar'
+  ];
 
   // Team 1 is Green Team, Team 2 is Blue Team
   const civilization_pick_stages = [
@@ -104,6 +107,7 @@ function DraftDisplay() {
   const derivedPickStage = pick_stages[currentStage];
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
+  const derivedAllBans = team1Bans.concat(team2Bans);
 
   return (
     <>
@@ -118,8 +122,22 @@ function DraftDisplay() {
         :
         <button onClick={() => beginDraft()}>Begin draft</button>}
       </div>
-      <Leaders onPickBan={onPickBan} team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
-      <Civilizations onPickBan={onPickBan} team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
+      <Leaders
+        onPickBan={onPickBan}
+        team_number={derivedTeamNumber}
+        banning={derivedStage.includes('ban')}
+        bans={derivedAllBans}
+        team1Picks={team1Picks}
+        team2Picks={team2Picks}
+      />
+      <Civilizations
+        onPickBan={onPickBan}
+        team_number={derivedTeamNumber}
+        banning={derivedStage.includes('ban')}
+        bans={derivedAllBans}
+        team1Picks={team1Picks}
+        team2Picks={team2Picks}
+      />
       <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
       <div>Picks Team2: {team2Picks.join(',')}</div>

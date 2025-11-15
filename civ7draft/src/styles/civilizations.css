@@ -22,10 +22,41 @@
     border-color: #398cd4; /* pick color */
 }
 
+/* Team 1 picking, but Team 2 has already picked this one */
+#civ_pool.team-1 > img.team2pick:hover { 
+    border-color: #398cd4;
+}
+
+/* Team 2 picking, but Team 1 has already picked this one */
+#civ_pool.team-2 > img.team1pick:hover {
+    border-color: #539942; /* pick color */
+}
+
+#civ_pool > img.banned:hover {
+    border-color: #8c2942;
+}
+
+
 #civ_pool.banning > img:hover {
     border-color: #8c2942; /* ban color */
 }
 
-#civ_pool.banned > img {
-    border-color: #8c2942; /* ban color */
+#civ_pool > img.banned {
+    cursor: not-allowed;
+    border: 5px solid #8c2942;
+    box-sizing: border-box;
 }
+
+#civ_pool > img.team1pick {
+    cursor: not-allowed;
+    border: 5px solid #539942;
+    box-sizing: border-box;
+}
+
+#civ_pool > img.team2pick {
+    cursor: not-allowed;
+    border: 5px solid #398cd4;
+    box-sizing: border-box;
+}
+
+/* banned no, team-1 yes team1pick no */
