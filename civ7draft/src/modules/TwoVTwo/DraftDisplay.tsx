@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react'
-import '../../styles/picks.css';
+import '../../styles/draft_display.css';
 
 import { default as Leaders } from './Leaders'
 
@@ -68,6 +68,7 @@ function DraftDisplay() {
       setTimeRemaining(DEFAULT_TOTAL_TIME_FOR_PICK);
     } else {
       setDraftInProgress(false);
+      setCurrentStage(0);
     }
   }
 
@@ -97,9 +98,17 @@ function DraftDisplay() {
   return (
     <>
       <div id="draft_display">
-        <button onClick={() => beginDraft()}>Begin timer</button>
-        <div>{pick_stages[currentStage][1]}</div>
-        <div>Time remaining: {timeRemaining}</div>
+        {draftInProgress ?
+        <div>
+          <div className={`stage_prompt team-${derivedTeamNumber}`}>
+            <p>{derivedStage}</p>
+          </div>
+          <div>Time remaining: {timeRemaining}</div>
+        </div>
+        :
+        <button onClick={() => beginDraft()}>Begin draft</button>}
+        
+        
       </div>
       <Leaders team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
     </>
