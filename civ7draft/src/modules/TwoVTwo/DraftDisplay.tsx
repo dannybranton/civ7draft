@@ -29,7 +29,11 @@ function DraftDisplay() {
     'miss',
     'ming',
     'egyptian',
-    'qajar'
+    'qajar',
+    'glass',
+    'antimachiavel',
+    'noteg',
+    'flag'
   ];
 
   // Team 1 is Green Team, Team 2 is Blue Team
@@ -235,10 +239,10 @@ function DraftDisplay() {
         proposedPickBan={proposedPickBan}
         draftMeta={draftMeta}
       />
-      <div>Picks Team1: {team1Picks.join(',')}</div>
+      {/* <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
       <div>Picks Team2: {team2Picks.join(',')}</div>
-      <div>Proposed pickban: {proposedPickBan}</div>
+      <div>Proposed pickban: {proposedPickBan}</div> */}
     </>
   )
 }

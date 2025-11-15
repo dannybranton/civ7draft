@@ -11,7 +11,7 @@ function App() {
       {/* <Sheets></Sheets> */}
       <div id="the_draft">
         <DraftDisplay />
-        <Picks />
+        {/* <Picks /> */}
       </div>
     </>
   )
