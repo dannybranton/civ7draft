@@ -13,14 +13,14 @@
     cursor: pointer;
 }
 
-#leader_pool.banning > img:hover {
-    background-color: #8c2942; /* ban color */
-}
-
 #leader_pool.team-1 > img:hover {
     background-color: #5cbf8f; /* pick color */
 }
 
 #leader_pool.team-2 > img:hover {
     background-color: #398cd4; /* pick color */
+}
+
+#leader_pool.banning > img:hover {
+    background-color: #8c2942; /* ban color */
 }

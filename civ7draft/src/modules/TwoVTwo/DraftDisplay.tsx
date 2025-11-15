@@ -90,8 +90,9 @@ function DraftDisplay() {
     }
   }, [timeRemaining, draftInProgress]);
 
-  const derivedStage = pick_stages[currentStage];
-  const derivedTeamNumber = derivedStage[0] as number;
+  const derivedPickStage = pick_stages[currentStage];
+  const derivedTeamNumber = derivedPickStage[0] as number;
+  const derivedStage = derivedPickStage[1] as string;
 
   return (
     <>
@@ -100,7 +101,7 @@ function DraftDisplay() {
         <div>{pick_stages[currentStage][1]}</div>
         <div>Time remaining: {timeRemaining}</div>
       </div>
-      <Leaders team_number={derivedTeamNumber} />
+      <Leaders team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
     </>
   )
 }
