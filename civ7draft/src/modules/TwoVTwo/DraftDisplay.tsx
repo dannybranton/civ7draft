@@ -18,6 +18,8 @@ function DraftDisplay() {
   const [team2Bans, setTeam2Bans] = useState<string[]>([]);
   const [team2Picks, setTeam2Picks] = useState<string[]>([]);
 
+  const [choiceMadeForCurrentStage, setChoiceMadeForCurrentStage] = useState(false);
+
   const houseBans: string[] = [
     'lafayette',
     'napoleonemperor',
@@ -101,13 +103,12 @@ function DraftDisplay() {
         banning ? setTeam2Bans(team2Bans.concat(pickedId)) : setTeam2Picks(team2Picks.concat(pickedId));
         break;
     }
-    console.log('onPickBand completed');
   }
 
   const derivedPickStage = pick_stages[currentStage];
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
-  const derivedAllBans = team1Bans.concat(team2Bans);
+  const derivedAllBans = team1Bans.concat(team2Bans).concat(houseBans);
 
   return (
     <>
