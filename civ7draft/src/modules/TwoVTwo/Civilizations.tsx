@@ -20,6 +20,7 @@ import tongan from '../../assets/Civilizations/Tongan_29.webp';
 
 interface CivilizationsProps {
   bans: Bans;
+  enablePickBans: boolean;
   picks: Picks;
   draftMeta: DraftMeta;
   team_number: number,
@@ -27,15 +28,18 @@ interface CivilizationsProps {
   onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
 }
 
-const Civilizations = ({team_number = 0, banning = false, onPickBan, bans, picks, draftMeta}: CivilizationsProps) => {
+const Civilizations = ({team_number = 0, banning = false, enablePickBans = false, onPickBan, bans, picks, draftMeta}: CivilizationsProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-    const element = event.target as HTMLImageElement;
-    onPickBan(element.id, team_number, banning);
+    console.log('enablePickBans: ' + enablePickBans);
+    if (enablePickBans){
+      const element = event.target as HTMLImageElement;
+      onPickBan(element.id, team_number, banning);
+    }
   }
   
   const getClasses = (id: string): string => {
-    return pickBanClasses(id, picks, bans, draftMeta, '');
+    return pickBanClasses(id, picks, bans, draftMeta, enablePickBans, '');
   }
 
   return (

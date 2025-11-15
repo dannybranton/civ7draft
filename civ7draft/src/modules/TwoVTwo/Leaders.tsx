@@ -38,6 +38,7 @@ import xerxesAchaemenid from '../../assets/Leaders/Xerxes,_the_Achaemenid_(Civ7)
 
 interface ILeadersProps {
   bans: Bans;
+  enablePickBans: boolean;
   picks: Picks;
   draftMeta: DraftMeta;
   team_number: number,
@@ -45,15 +46,17 @@ interface ILeadersProps {
   onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
 }
 
-const Leaders = ({team_number = 0, banning = false, onPickBan, bans, picks, draftMeta}: ILeadersProps) => {
+const Leaders = ({team_number = 0, banning = false, enablePickBans = false, onPickBan, bans, picks, draftMeta}: ILeadersProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-    const element = event.target as HTMLImageElement;
-    onPickBan(element.id, team_number, banning);
+    if (enablePickBans) {
+      const element = event.target as HTMLImageElement;
+      onPickBan(element.id, team_number, banning);
+    }
   }
 
   const getClasses = (id: string): string => {
-    return pickBanClasses(id, picks, bans, draftMeta, '');
+    return pickBanClasses(id, picks, bans, draftMeta, enablePickBans, '');
   }
 
   return (
