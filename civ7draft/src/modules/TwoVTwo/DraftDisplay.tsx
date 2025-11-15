@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from 'react'
 import '../../styles/draft_display.css';
 
 import { default as Leaders } from './Leaders'
+import { default as Civilizations } from './Civilizations';
 
 const CHOICES = {
   BAN: 'ban',
@@ -109,6 +110,7 @@ function DraftDisplay() {
         <button onClick={() => beginDraft()}>Begin draft</button>}
       </div>
       <Leaders team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
+      <Civilizations team_number={derivedTeamNumber} banning={derivedStage.includes('ban')} />
     </>
   )
 }

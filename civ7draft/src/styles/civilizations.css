@@ -1,0 +1,25 @@
+#civ_pool {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#civ_pool > img {
+    width: 100px;
+    height: 100px;
+}
+
+#civ_pool > img:hover {
+    cursor: pointer;
+}
+
+#civ_pool.team-1 > img:hover {
+    background-color: #539942;
+}
+
+#civ_pool.team-2 > img:hover {
+    background-color: #398cd4; /* pick color */
+}
+
+#civ_pool.banning > img:hover {
+    background-color: #8c2942; /* ban color */
+}
