@@ -9,7 +9,7 @@ import type { Bans, DraftMeta, PROGRESS_STATUS } from '../../interfaces/draft/dr
 
 import { HOUSE_BANS } from '../../utilities/draft/constants';
 
-const DEFAULT_TOTAL_TIME_FOR_PICK = 6;
+const DEFAULT_TOTAL_TIME_FOR_PICK = 25;
 
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
