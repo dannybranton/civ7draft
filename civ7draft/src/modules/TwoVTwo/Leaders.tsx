@@ -2,7 +2,6 @@ import '../../styles/leaders.css';
 
 import type { DraftMeta, Bans, Picks } from '../../interfaces/draft/draft';
 import { isPickable, pickBanClasses } from '../../utilities/draft/draft';
-import { MILITARY_LEADERS } from '../../utilities/draft/constants';
 
 import adaLogo from '../../assets/Leaders/Ada_Lovelace_(Civ7).png';
 import aminaLogo from '../../assets/Leaders/Amina.png';
@@ -53,7 +52,7 @@ const Leaders = ({team_number = 0, banning = false, enablePickBans = false, onPi
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     if (enablePickBans) {
       const element = event.target as HTMLImageElement;
-      if (isPickable(element.id, team_number, picks, bans, draftMeta, proposedPickBan)) {
+      if (isPickable(element.id, team_number, picks, bans, draftMeta)) {
         onPickBan(element.id, team_number, banning);
       }
     }
