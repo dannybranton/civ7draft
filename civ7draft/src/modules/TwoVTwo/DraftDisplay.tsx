@@ -97,6 +97,7 @@ function DraftDisplay() {
     setTeam1Picks([]);
     setTeam2Bans([]);
     setTeam2Picks([]);
+    setTimeRemaining(DEFAULT_TOTAL_TIME_FOR_PICK);
   }
 
   useEffect(() => {
