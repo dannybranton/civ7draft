@@ -22,4 +22,5 @@ export type STAGE_SELECTION_TYPE = CIVILIZATION | LEADER | MEMENTO
 export interface DraftMeta {
   draftStatus: PROGRESS_STATUS
   proposedPickBan?: string
+  stageType: STAGE_SELECTION_TYPE
 }

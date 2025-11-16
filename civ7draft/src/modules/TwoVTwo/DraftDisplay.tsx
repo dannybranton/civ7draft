@@ -5,9 +5,11 @@ import { default as Leaders } from './Leaders'
 import { default as Mementos } from './Mementos'
 import { default as Civilizations } from './Civilizations';
 
-import type { CIVILIZATION, LEADER, MEMENTO, Bans, DraftMeta, Picks, PROGRESS_STATUS, STAGE_SELECTION_TYPE, NOT_STARTED } from '../../interfaces/draft/draft';
+import type { Bans, DraftMeta, PROGRESS_STATUS, STAGE_SELECTION_TYPE } from '../../interfaces/draft/draft';
 
-const DEFAULT_TOTAL_TIME_FOR_PICK = 5;
+import { HOUSE_BANS } from '../../utilities/draft/constants';
+
+const DEFAULT_TOTAL_TIME_FOR_PICK = 25;
 
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
@@ -22,24 +24,14 @@ function DraftDisplay() {
   const [team2Bans, setTeam2Bans] = useState<string[]>([]);
   const [team2Picks, setTeam2Picks] = useState<string[]>([]);
 
-  const houseBans: string[] = [
-    'lafayette',
-    'napoleonemperor',
-    'harriet',
-    'miss',
-    'ming',
-    'egyptian',
-    'qajar'
-  ];
-
   // Team 1 is Green Team, Team 2 is Blue Team
   let civilization_pick_stages = [
     [1, `${team1Name} ban a civilization`, 'CIVILIZATION'],
     [2, `${team2Name} ban a civilization`, 'CIVILIZATION'],
-    [1, `${team1Name} pick first civilization`, 'CIVILIZATION'],
-    [2, `${team2Name} pick first civilization`, 'CIVILIZATION'],
-    [1, `${team1Name} pick second civilization`, 'CIVILIZATION'],
-    [2, `${team2Name} pick second civilization`, 'CIVILIZATION']
+    [1, `${team1Name} pick a civilization`, 'CIVILIZATION'],
+    [2, `${team2Name} pick a civilization`, 'CIVILIZATION'],
+    [1, `${team1Name} pick a 2nd civilization`, 'CIVILIZATION'],
+    [2, `${team2Name} pick a 2nd civilization`, 'CIVILIZATION']
   ];
 
   const memento_ban_1 = [
@@ -55,13 +47,21 @@ function DraftDisplay() {
   const leader_pick_stages = [
     [2, `${team2Name} ban a leader`, 'LEADER'],
     [1, `${team1Name} ban a leader`, 'LEADER'],
-    [2, `${team2Name} pick first leader`, 'LEADER'],
-    [1, `${team1Name} pick first leader`, 'LEADER'],
-    [2, `${team2Name} pick second leader`, 'LEADER'],
-    [1, `${team1Name} pick second leader`, 'LEADER']
+    [2, `${team2Name} pick a leader`, 'LEADER'],
+    [1, `${team1Name} pick a leader`, 'LEADER'],
+    [2, `${team2Name} pick a second leader`, 'LEADER'],
+    [1, `${team1Name} pick a second leader`, 'LEADER']
   ];
 
   const pick_stages = [ ...civilization_pick_stages, ...memento_ban_1, ...leader_pick_stages, ...memento_ban_2 ];
+
+  const derivedPickStage = pick_stages[currentStage];
+  const derivedTeamNumber = derivedPickStage[0] as number;
+  const derivedStage = derivedPickStage[1] as string;
+  const derivedStageType = derivedPickStage[2] as STAGE_SELECTION_TYPE;
+  const bans: Bans = { houseBans: HOUSE_BANS, draftBans: team1Bans.concat(team2Bans)}
+  const draftMeta: DraftMeta = { draftStatus, proposedPickBan, stageType: derivedStageType };
+  const banning: boolean = derivedStage.includes('ban');
 
   const beginDraft = () => {
     setDraftStatus("IN_PROGRESS");
@@ -69,6 +69,29 @@ function DraftDisplay() {
 
   const nextStage = () => {
     if (currentStage < pick_stages.length - 1){
+      if (proposedPickBan == ''){ //when advancing stages, if no pick has been made, make one
+        switch (derivedPickStage[2]) {
+          case 'LEADER':
+            let numPickableLeaders = document.querySelectorAll('#leader_pool > .pickable').length
+            let randomLeaderNum = Math.floor(Math.random() * numPickableLeaders);
+            const randomLeader = document.querySelectorAll('#leader_pool > img.pickable')[randomLeaderNum].getAttribute('id') as string;
+            onPickBan(randomLeader, derivedTeamNumber, banning);
+            break;
+          case 'CIVILIZATION':
+            let numPickableCivs = document.querySelectorAll('#civ_pool > .pickable').length
+            let randomCivNum = Math.floor(Math.random() * numPickableCivs);
+            const randomCiv = document.querySelectorAll('#civ_pool > img.pickable')[randomCivNum].getAttribute('id') as string;
+            onPickBan(randomCiv, derivedTeamNumber, banning);
+            break;
+          case 'MEMENTO':
+            let numPickableMementos = document.querySelectorAll('#memento_pool > .pickable').length
+            let randomMementoNum = Math.floor(Math.random() * numPickableMementos);
+            const randomMemento = document.querySelectorAll('#memento_pool > img.pickable')[randomMementoNum].getAttribute('id') as string;
+            onPickBan(randomMemento, derivedTeamNumber, banning);
+            break;
+        }
+      }
+
       setCurrentStage(currentStage + 1);
       setTimeRemaining(DEFAULT_TOTAL_TIME_FOR_PICK);
       setProposedPickBan('');
@@ -87,18 +110,23 @@ function DraftDisplay() {
     setDraftStatus('IN_PROGRESS');
   }
 
+  const skip = () => {
+    nextStage();
+  }
+
   const restartDraft = () => {
     setDraftStatus('NOT_STARTED');
     setTeam1Bans([]);
     setTeam1Picks([]);
     setTeam2Bans([]);
     setTeam2Picks([]);
+    setTimeRemaining(DEFAULT_TOTAL_TIME_FOR_PICK);
   }
 
   useEffect(() => {
     if (draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') {
       const countdownInterval = setInterval(() => {
-        if (timeRemaining <= 0) {
+        if ((timeRemaining <= 0 && proposedPickBan !== '') || timeRemaining <= -3) { //Grace period of 3 seconds
           setTimeRemaining(0);
           clearInterval(countdownInterval);
           nextStage();
@@ -138,9 +166,13 @@ function DraftDisplay() {
       switch (teamNumber) {
         case 1:
           banning ? newTeam1Bans = newTeam1Bans.concat(pickedId) : newTeam1Picks = newTeam1Picks.concat(pickedId);
+          if (banning && pickedId == 'sulde') newTeam1Bans = newTeam1Bans.concat('artilleryman');
+          if (banning && pickedId == 'artilleryman') newTeam1Bans = newTeam1Bans.concat('sulde');
           break;
         case 2:
           banning ? newTeam2Bans = newTeam2Bans.concat(pickedId) : newTeam2Picks = newTeam2Picks.concat(pickedId);
+          if (banning && pickedId == 'sulde') newTeam2Bans = newTeam2Bans.concat('artilleryman');
+          if (banning && pickedId == 'artilleryman') newTeam2Bans = newTeam2Bans.concat('sulde');
           break;
       }
       setTeam1Bans(newTeam1Bans);
@@ -159,22 +191,22 @@ function DraftDisplay() {
 
     switch (draftStatus) {
       case 'NOT_STARTED':
-        buttonAction = () => beginDraft();
+        buttonAction = beginDraft;
         buttonText = "Begin draft";
         break;
       case 'IN_PROGRESS':
         buttonClass = 'pause'
-        buttonAction = () => pauseDraft();
-        buttonText = "Pause draft";
+        buttonAction = pauseDraft;
+        buttonText = "Pause";
         break;
       case 'PAUSED':
         buttonClass = 'resume';
-        buttonAction = () => resumeDraft();
-        buttonText = "Resume draft";
+        buttonAction = resumeDraft;
+        buttonText = "Resume";
         break;
       case 'COMPLETED':
         buttonClass = 'restart';
-        buttonAction = () => restartDraft();
+        buttonAction = restartDraft;
         buttonText = "Restart draft";
         break;
     }
@@ -184,27 +216,8 @@ function DraftDisplay() {
     </>
   }
 
-  const derivedPickStage = pick_stages[currentStage];
-  const derivedTeamNumber = derivedPickStage[0] as number;
-  const derivedStage = derivedPickStage[1] as string;
-  const bans: Bans = { houseBans, draftBans: team1Bans.concat(team2Bans)}
-  const draftMeta: DraftMeta = { draftStatus, proposedPickBan };
-
   return (
     <>
-      <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
-        {(draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') &&
-          <div>
-            <div className={`stage_prompt team-${derivedTeamNumber}`}>
-              
-              <p>{derivedStage}</p>
-              <p className='timer'>{timeRemaining}</p>
-            </div>
-          </div>
-        }
-        {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
-        <DraftButton />
-      </div>
       <Civilizations
         onPickBan={onPickBan}
         team_number={derivedTeamNumber}
@@ -235,10 +248,31 @@ function DraftDisplay() {
         proposedPickBan={proposedPickBan}
         draftMeta={draftMeta}
       />
-      <div>Picks Team1: {team1Picks.join(',')}</div>
+      <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
+        {(draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') &&
+          <div>
+            <div className={`stage_prompt team-${derivedTeamNumber}`}>
+              <p>{derivedStage}</p>
+              <p className='timer'>{timeRemaining}</p>
+            </div>
+          </div>
+        }
+        {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
+        {(draftStatus == 'NOT_STARTED') &&
+          <input value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
+        }
+        {(draftStatus == 'IN_PROGRESS') &&
+          <button className='skip_button' onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
+        }
+        <DraftButton />
+        {(draftStatus == 'NOT_STARTED') &&
+          <input value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
+        }
+      </div>
+      {/* <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
       <div>Picks Team2: {team2Picks.join(',')}</div>
-      <div>Proposed pickban: {proposedPickBan}</div>
+      <div>Proposed pickban: {proposedPickBan}</div> */}
     </>
   )
 }

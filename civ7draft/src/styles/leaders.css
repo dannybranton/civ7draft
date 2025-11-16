@@ -1,6 +1,7 @@
 #leader_pool {
     display: flex;
     flex-flow: row wrap;
+    margin: 8px;
 }
 
 #leader_pool > img {
@@ -10,6 +11,11 @@
 
 #leader_pool > img:hover {
     background-color: #81888f;
+}
+
+#leader_pool > img#sayyida:hover {
+    border: 6px solid gray;
+    box-sizing: border-box;
 }
 
 #leader_pool > img.pickable:hover {
@@ -24,8 +30,48 @@
     background-color: #398cd4;
 }
 
+#leader_pool.team-1 > img#sayyida.pickable:hover {
+    border-color: #539942;
+}
+
+#leader_pool.team-2 > img#sayyida.pickable:hover {
+    border-color: #398cd4; /* pick color */
+}
+
 #leader_pool.banning > img.pickable:hover {
     background-color: #8c2942; /* ban color */
+}
+
+#leader_pool.banning > img#sayyida.pickable:hover {
+    border-color: #8c2942; /* ban color */
+}
+
+#leader_pool > img.team1pick, #leader_pool > img.banned.twomilitarybanned.team1pick, #leader_pool > img.twomilitarybanned.team1pick {
+    background-color: #539942; /* ban color */
+    cursor: not-allowed;
+    filter: opacity(1);
+}
+
+#leader_pool > img.team2pick, #leader_pool > img.banned.twomilitarybanned.team2pick, #leader_pool > img.twomilitarybanned.team2pick {
+    background-color: #398cd4; /* ban color */
+    cursor: not-allowed;
+    filter: opacity(1);
+}
+
+#leader_pool > img#sayyida.team1pick {
+    border: none;
+    border-bottom: 16px solid #539942;
+    box-sizing: content-box;
+}
+
+#leader_pool > img#sayyida.team2pick {
+    border: none;
+    border-bottom: 16px solid #398cd4;
+    box-sizing: content-box;
+}
+
+#leader_pool > img.proposed {
+    cursor: default;
 }
 
 #leader_pool > img.banned {
@@ -33,20 +79,12 @@
     cursor: not-allowed;
 }
 
-#leader_pool > img.banned.housebanned {
+#leader_pool > img.banned.twomilitarybanned, #leader_pool > img.twomilitarybanned {
     background-color: #81888f; /* ban color */
+    filter: opacity(0.5);
 }
 
-#leader_pool > img.team1pick {
-    background-color: #539942; /* ban color */
-    cursor: not-allowed;
-}
-
-#leader_pool > img.team2pick {
-    background-color: #398cd4; /* ban color */
-    cursor: not-allowed;
-}
-
-#leader_pool > img.proposed {
-    cursor: default;
+#leader_pool > img.banned.housebanned, #leader_pool > img.housebanned {
+    background-color: #81888f; /* ban color */
+    filter: opacity(1);
 }

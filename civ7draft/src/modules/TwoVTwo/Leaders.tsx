@@ -2,6 +2,7 @@ import '../../styles/leaders.css';
 
 import type { DraftMeta, Bans, Picks } from '../../interfaces/draft/draft';
 import { isPickable, pickBanClasses } from '../../utilities/draft/draft';
+import { MILITARY_LEADERS } from '../../utilities/draft/constants';
 
 import adaLogo from '../../assets/Leaders/Ada_Lovelace_(Civ7).png';
 import aminaLogo from '../../assets/Leaders/Amina.png';
@@ -52,51 +53,51 @@ const Leaders = ({team_number = 0, banning = false, enablePickBans = false, onPi
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     if (enablePickBans) {
       const element = event.target as HTMLImageElement;
-      if (isPickable(element.id, picks, bans, draftMeta)) {
+      if (isPickable(element.id, team_number, picks, bans, draftMeta, proposedPickBan)) {
         onPickBan(element.id, team_number, banning);
       }
     }
   }
 
   const getClasses = (id: string): string => {
-    return pickBanClasses(id, picks, bans, draftMeta, enablePickBans, proposedPickBan, '');
+    return pickBanClasses(id, team_number, picks, bans, draftMeta, enablePickBans, proposedPickBan, '');
   }
 
   return (
     <>
       <div id='leader_pool' className={`team-${team_number} ${banning ? 'banning' : ''}`}>
-        <img id="ada" src={ adaLogo } onClick={handleClick} className={getClasses('ada')}></img>
-        <img id="amina" src={ aminaLogo } onClick={handleClick} className={getClasses('amina')} ></img>
-        <img id="ashokaConqueror" src={ ashokaConqueror } onClick={handleClick} className={getClasses('ashokaConqueror')} ></img>
-        <img id="ashokaRenouncer" src={ ashokaRenouncer } onClick={handleClick} className={getClasses('ashokaRenouncer')} ></img>
-        <img id="augustus" src={ augustus } onClick={handleClick} className={getClasses('augustus')} ></img>
-        <img id="benFranklin" src={ benFranklin } onClick={handleClick} className={getClasses('benFranklin')} ></img>
-        <img id="catherine" src={ catherine } onClick={handleClick} className={getClasses('catherine')} ></img>
-        <img id="charlemagne" src={ charlemagne } onClick={handleClick} className={getClasses('charlemagne')} ></img>
-        <img id="confucius" src={ confucius } onClick={handleClick} className={getClasses('confucius')} ></img>
-        <img id="edwardTeach" src={ edwardTeach } onClick={handleClick} className={getClasses('edwardTeach')} ></img>
-        <img id="friedrichBaroque" src={ friedrichBaroque } onClick={handleClick} className={getClasses('friedrichBaroque')} ></img>
-        <img id="friedrichOblique" src={ friedrichOblique } onClick={handleClick} className={getClasses('friedrichOblique')} ></img>
-        <img id="ghengis" src={ ghengis } onClick={handleClick} className={getClasses('ghengis')} ></img>
-        <img id="harriet" src={ harriet } onClick={handleClick} className={getClasses('harriet')} ></img>
-        <img id="hatshepsut" src={ hatshepsut } onClick={handleClick} className={getClasses('hatshepsut')} ></img>
-        <img id="himikohighshaman" src={ himikohighshaman } onClick={handleClick} className={getClasses('himikohighshaman')} ></img>
-        <img id="himikowa" src={ himikowa } onClick={handleClick} className={getClasses('himikowa')} ></img>
-        <img id="ibn" src={ ibn } onClick={handleClick} className={getClasses('ibn')} ></img>
-        <img id="isabella" src={ isabella } onClick={handleClick} className={getClasses('isabella')} ></img>
-        <img id="joserizal" src={ joserizal } onClick={handleClick} className={getClasses('joserizal')} ></img>
-        <img id="lafayette" src={ lafayette } onClick={handleClick} className={getClasses('lafayette')} ></img>
-        <img id="lakshmibai" src={ lakshmibai } onClick={handleClick} className={getClasses('lakshmibai')} ></img>
-        <img id="machiavelli" src={ machiavelli } onClick={handleClick} className={getClasses('machiavelli')} ></img>
-        <img id="napoleonemperor" src={ napoleonemperor } onClick={handleClick} className={getClasses('napoleonemperor')} ></img>
-        <img id="napoleonrevolutionary" src={ napoleonrevolutionary } onClick={handleClick} className={getClasses('napoleonrevolutionary')} ></img>
-        <img id="pachacuti" src={ pachacuti } onClick={handleClick} className={getClasses('pachacuti')} ></img>
-        <img id="sayyida" src={ sayyida } onClick={handleClick} className={getClasses('sayyida')} ></img>
-        <img id="simonbolivar" src={ simonbolivar } onClick={handleClick} className={getClasses('simonbolivar')} ></img>
-        <img id="tecumseh" src={ tecumseh } onClick={handleClick} className={getClasses('tecumseh')} ></img>
-        <img id="trungtrac" src={ trungtrac } onClick={handleClick} className={getClasses('trungtrac')} ></img>
-        <img id="xerxes" src={ xerxes } onClick={handleClick} className={getClasses('xerxes')} ></img>
-        <img id="xerxesAchaemenid" src={ xerxesAchaemenid } onClick={handleClick} className={getClasses('xerxesAchaemenid')} ></img>
+        <img id="ada" title="Ada Lovelace" src={ adaLogo } onClick={handleClick} className={getClasses('ada')}></img>
+        <img id="amina" title="Amina" src={ aminaLogo } onClick={handleClick} className={getClasses('amina')} ></img>
+        <img id="ashokaConqueror" title="Ashoka, World Conqueror" src={ ashokaConqueror } onClick={handleClick} className={getClasses('ashokaConqueror')} ></img>
+        <img id="ashokaRenouncer" title="Ashoka, World Renouncer" src={ ashokaRenouncer } onClick={handleClick} className={getClasses('ashokaRenouncer')} ></img>
+        <img id="augustus" title="Augustus" src={ augustus } onClick={handleClick} className={getClasses('augustus')} ></img>
+        <img id="benFranklin" title="Benjamin Franklin" src={ benFranklin } onClick={handleClick} className={getClasses('benFranklin')} ></img>
+        <img id="catherine" title="Catherine the Great" src={ catherine } onClick={handleClick} className={getClasses('catherine')} ></img>
+        <img id="charlemagne" title="Charlemagne" src={ charlemagne } onClick={handleClick} className={getClasses('charlemagne')} ></img>
+        <img id="confucius" title="Confucius" src={ confucius } onClick={handleClick} className={getClasses('confucius')} ></img>
+        <img id="edwardTeach" title="Edward Teach" src={ edwardTeach } onClick={handleClick} className={getClasses('edwardTeach')} ></img>
+        <img id="friedrichBaroque" title="Friedrich, Baroque" src={ friedrichBaroque } onClick={handleClick} className={getClasses('friedrichBaroque')} ></img>
+        <img id="friedrichOblique" title="Friedrich, Oblique" src={ friedrichOblique } onClick={handleClick} className={getClasses('friedrichOblique')} ></img>
+        <img id="ghengis" title="Genghis Khan" src={ ghengis } onClick={handleClick} className={getClasses('ghengis')} ></img>
+        <img id="harriet" title="Harriet Tubman" src={ harriet } onClick={handleClick} className={getClasses('harriet')} ></img>
+        <img id="hatshepsut" title="Hatshepsut" src={ hatshepsut } onClick={handleClick} className={getClasses('hatshepsut')} ></img>
+        <img id="himikohighshaman" title="Himiko, High Shaman" src={ himikohighshaman } onClick={handleClick} className={getClasses('himikohighshaman')} ></img>
+        <img id="himikowa" title="Himiko, Queen of Wa" src={ himikowa } onClick={handleClick} className={getClasses('himikowa')} ></img>
+        <img id="ibn" title="Ibn Battuta" src={ ibn } onClick={handleClick} className={getClasses('ibn')} ></img>
+        <img id="isabella" title="Isabella" src={ isabella } onClick={handleClick} className={getClasses('isabella')} ></img>
+        <img id="joserizal" title="José Rizal" src={ joserizal } onClick={handleClick} className={getClasses('joserizal')} ></img>
+        <img id="lafayette" title="Lafayette" src={ lafayette } onClick={handleClick} className={getClasses('lafayette')} ></img>
+        <img id="lakshmibai" title="Lakshmibai" src={ lakshmibai } onClick={handleClick} className={getClasses('lakshmibai')} ></img>
+        <img id="machiavelli" title="Machiavelli" src={ machiavelli } onClick={handleClick} className={getClasses('machiavelli')} ></img>
+        <img id="napoleonemperor" title="Napoleon, Emperor" src={ napoleonemperor } onClick={handleClick} className={getClasses('napoleonemperor')} ></img>
+        <img id="napoleonrevolutionary" title="Napoleon, Revolutionary" src={ napoleonrevolutionary } onClick={handleClick} className={getClasses('napoleonrevolutionary')} ></img>
+        <img id="pachacuti" title="Pachacuti" src={ pachacuti } onClick={handleClick} className={getClasses('pachacuti')} ></img>
+        <img id="sayyida" title="Sayyida al Hurra" src={ sayyida } onClick={handleClick} className={getClasses('sayyida')} ></img>
+        <img id="simonbolivar" title="Simón Bolívar" src={ simonbolivar } onClick={handleClick} className={getClasses('simonbolivar')} ></img>
+        <img id="tecumseh" title="Tecumseh" src={ tecumseh } onClick={handleClick} className={getClasses('tecumseh')} ></img>
+        <img id="trungtrac" title="Trung Trac" src={ trungtrac } onClick={handleClick} className={getClasses('trungtrac')} ></img>
+        <img id="xerxes" title="Xerxes, King of Kings" src={ xerxes } onClick={handleClick} className={getClasses('xerxes')} ></img>
+        <img id="xerxesAchaemenid" title="Xerxes, the Achaemenid" src={ xerxesAchaemenid } onClick={handleClick} className={getClasses('xerxesAchaemenid')} ></img>
 
       </div>
     </>

@@ -7,7 +7,8 @@
     place-content: center;
     align-items: center;
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 20px;
 
     height: 50px;
     background: #81888f;
@@ -15,7 +16,11 @@
 
 #draft_display.completed {
     background: #18c7bb;
-    color: white;
+    color: black;
+}
+
+#draft_display > input {
+    margin: 0 16px;
 }
 
 .stage_prompt {
@@ -37,6 +42,7 @@
     font-size: 32px;
     font-weight: 600;
     margin: 4px 24px 0 24px;
+    line-height: 44px;
 }
 
 .draft_button.pause {
@@ -48,5 +54,11 @@
 .draft_button.resume, .draft_button.pause, .draft_button.restart {
     position: fixed;
     right: 0;
+    margin: 9px 8px 8px 8px;
+}
+
+.skip_button {
+    position: fixed;
+    right: 94px;
     margin: 9px 8px 8px 8px;
 }
