@@ -4,10 +4,12 @@ import '../../styles/draft_display.css';
 import { default as Leaders } from './Leaders'
 import { default as Mementos } from './Mementos'
 import { default as Civilizations } from './Civilizations';
+import { default as Format } from './Format';
 
 import type { Bans, DraftMeta, PROGRESS_STATUS, STAGE_SELECTION_TYPE } from '../../interfaces/draft/draft';
 
 import { HOUSE_BANS } from '../../utilities/draft/constants';
+import { getPickOrder, getRandomInt } from '../../utilities/draft/pickorder';
 
 const DEFAULT_TOTAL_TIME_FOR_PICK = 25;
 
@@ -24,36 +26,11 @@ function DraftDisplay() {
   const [team2Bans, setTeam2Bans] = useState<string[]>([]);
   const [team2Picks, setTeam2Picks] = useState<string[]>([]);
 
-  // Team 1 is Green Team, Team 2 is Blue Team
-  let civilization_pick_stages = [
-    [1, `${team1Name} ban a civilization`, 'CIVILIZATION'],
-    [2, `${team2Name} ban a civilization`, 'CIVILIZATION'],
-    [1, `${team1Name} pick a civilization`, 'CIVILIZATION'],
-    [2, `${team2Name} pick a civilization`, 'CIVILIZATION'],
-    [1, `${team1Name} pick a 2nd civilization`, 'CIVILIZATION'],
-    [2, `${team2Name} pick a 2nd civilization`, 'CIVILIZATION']
-  ];
+  const [picksFirst, setPicksFirst] = useState(getRandomInt(1,3));
 
-  const memento_ban_1 = [
-    [1, `${team1Name} ban a memento`, 'MEMENTO'],
-    [2, `${team2Name} ban a memento`, 'MEMENTO'],
-  ];
+  const [viewFormat, setViewFormat] = useState(false);
 
-  const memento_ban_2 = [
-    [2, `${team2Name} ban a memento`, 'MEMENTO'],
-    [1, `${team1Name} ban a memento`, 'MEMENTO'],
-  ];
-
-  const leader_pick_stages = [
-    [2, `${team2Name} ban a leader`, 'LEADER'],
-    [1, `${team1Name} ban a leader`, 'LEADER'],
-    [2, `${team2Name} pick a leader`, 'LEADER'],
-    [1, `${team1Name} pick a leader`, 'LEADER'],
-    [2, `${team2Name} pick a second leader`, 'LEADER'],
-    [1, `${team1Name} pick a second leader`, 'LEADER']
-  ];
-
-  const pick_stages = [ ...civilization_pick_stages, ...memento_ban_1, ...leader_pick_stages, ...memento_ban_2 ];
+  const pick_stages = getPickOrder(team1Name, team2Name, picksFirst);
 
   const derivedPickStage = pick_stages[currentStage];
   const derivedTeamNumber = derivedPickStage[0] as number;
@@ -65,6 +42,7 @@ function DraftDisplay() {
 
   const beginDraft = () => {
     setDraftStatus("IN_PROGRESS");
+    setViewFormat(false);
   }
 
   const nextStage = () => {
@@ -108,12 +86,25 @@ function DraftDisplay() {
 
   const resumeDraft = () => {
     setDraftStatus('IN_PROGRESS');
+    setViewFormat(false);
   }
 
   const skip = () => {
     nextStage();
+    setViewFormat(false);
   }
 
+  const viewFormatSwitch = () => {
+    if (viewFormat) {
+      setViewFormat(false);
+    } else {
+      if (draftStatus == 'IN_PROGRESS'){
+        pauseDraft();
+      }
+      setViewFormat(true);
+    }
+  }
+  
   const restartDraft = () => {
     setDraftStatus('NOT_STARTED');
     setTeam1Bans([]);
@@ -121,6 +112,7 @@ function DraftDisplay() {
     setTeam2Bans([]);
     setTeam2Picks([]);
     setTimeRemaining(DEFAULT_TOTAL_TIME_FOR_PICK);
+    setPicksFirst(getRandomInt(1,3));
   }
 
   useEffect(() => {
@@ -218,36 +210,41 @@ function DraftDisplay() {
 
   return (
     <>
-      <Civilizations
-        onPickBan={onPickBan}
-        team_number={derivedTeamNumber}
-        banning={derivedStage.includes('ban')}
-        enablePickBans={derivedPickStage[2] == 'CIVILIZATION'}
-        bans={bans}
-        picks={{team1Picks, team2Picks}}
-        proposedPickBan={proposedPickBan}
-        draftMeta={draftMeta}
-      />
-      <Leaders
-        onPickBan={onPickBan}
-        team_number={derivedTeamNumber}
-        banning={derivedStage.includes('ban')}
-        enablePickBans={derivedPickStage[2] == 'LEADER'}
-        bans={bans}
-        picks={{team1Picks, team2Picks}}
-        proposedPickBan={proposedPickBan}
-        draftMeta={draftMeta}
-      />
-      <Mementos
-        onPickBan={onPickBan}
-        team_number={derivedTeamNumber}
-        banning={derivedStage.includes('ban')}
-        enablePickBans={derivedPickStage[2] == 'MEMENTO'}
-        bans={bans}
-        picks={{team1Picks, team2Picks}}
-        proposedPickBan={proposedPickBan}
-        draftMeta={draftMeta}
-      />
+      
+      {viewFormat ? <Format /> :
+      <>
+        <Civilizations
+          onPickBan={onPickBan}
+          team_number={derivedTeamNumber}
+          banning={derivedStage.includes('ban')}
+          enablePickBans={derivedPickStage[2] == 'CIVILIZATION'}
+          bans={bans}
+          picks={{team1Picks, team2Picks}}
+          proposedPickBan={proposedPickBan}
+          draftMeta={draftMeta}
+        />
+        <Leaders
+          onPickBan={onPickBan}
+          team_number={derivedTeamNumber}
+          banning={derivedStage.includes('ban')}
+          enablePickBans={derivedPickStage[2] == 'LEADER'}
+          bans={bans}
+          picks={{team1Picks, team2Picks}}
+          proposedPickBan={proposedPickBan}
+          draftMeta={draftMeta}
+        />
+        <Mementos
+          onPickBan={onPickBan}
+          team_number={derivedTeamNumber}
+          banning={derivedStage.includes('ban')}
+          enablePickBans={derivedPickStage[2] == 'MEMENTO'}
+          bans={bans}
+          picks={{team1Picks, team2Picks}}
+          proposedPickBan={proposedPickBan}
+          draftMeta={draftMeta}
+        />
+      </>
+      }
       <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
         {(draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') &&
           <div>
@@ -258,15 +255,16 @@ function DraftDisplay() {
           </div>
         }
         {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
+        <button className='format_button' onClick={() => viewFormatSwitch()}>{viewFormat ? 'Draft' : 'Rules'}</button>
         {(draftStatus == 'NOT_STARTED') &&
-          <input value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
+          <input id='team1_name' value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
         }
         {(draftStatus == 'IN_PROGRESS') &&
           <button className='skip_button' onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
         }
         <DraftButton />
         {(draftStatus == 'NOT_STARTED') &&
-          <input value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
+          <input id='team2_name' value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
         }
       </div>
       {/* <div>Picks Team1: {team1Picks.join(',')}</div>

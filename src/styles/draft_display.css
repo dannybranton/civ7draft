@@ -21,6 +21,7 @@
 
 #draft_display > input {
     margin: 0 16px;
+    height: 20px;
 }
 
 .stage_prompt {
@@ -61,4 +62,23 @@
     position: fixed;
     right: 94px;
     margin: 9px 8px 8px 8px;
+}
+
+.format_button {
+    position: fixed;
+    left: 0;
+    margin: 9px 8px 8px 8px;
+}
+
+#format {
+    align-self: center;
+    display: flex;
+}
+
+#format img#pick_order {
+    width: 516px;
+}
+
+#rules {
+    margin: 0 24px;
 }
