@@ -42,6 +42,7 @@ function DraftDisplay() {
 
   const beginDraft = () => {
     setDraftStatus("IN_PROGRESS");
+    setViewFormat(false);
   }
 
   const nextStage = () => {
@@ -85,17 +86,16 @@ function DraftDisplay() {
 
   const resumeDraft = () => {
     setDraftStatus('IN_PROGRESS');
+    setViewFormat(false);
   }
 
   const skip = () => {
     nextStage();
-  
+    setViewFormat(false);
   }
+
   const viewFormatSwitch = () => {
     if (viewFormat) {
-      if (draftStatus == 'PAUSED'){
-        resumeDraft();
-      }
       setViewFormat(false);
     } else {
       if (draftStatus == 'IN_PROGRESS'){
@@ -255,7 +255,7 @@ function DraftDisplay() {
           </div>
         }
         {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
-        <button className='format_button' onClick={() => viewFormatSwitch()}>{viewFormat ? 'View draft' : 'View format'}</button>
+        <button className='format_button' onClick={() => viewFormatSwitch()}>{viewFormat ? 'Draft' : 'Rules'}</button>
         {(draftStatus == 'NOT_STARTED') &&
           <input id='team1_name' value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
         }

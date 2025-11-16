@@ -6,9 +6,10 @@ function Format() {
     <>
       <div id="format">
         <div>
-          <img src={draftphases} title={'Draft phases'}></img>
+          <img id="pick_order" src={draftphases} title={'Draft phases'}></img>
         </div>
         <div id="rules">
+          <h2>Royal Rumble</h2>
           <div>
             <h3>2v2 Tournament</h3>
             <ul>
