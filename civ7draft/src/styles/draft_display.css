@@ -19,6 +19,10 @@
     color: white;
 }
 
+#draft_display > input {
+    margin: 0 16px;
+}
+
 .stage_prompt {
     display: flex;
     place-content: center;

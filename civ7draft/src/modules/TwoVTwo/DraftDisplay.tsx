@@ -234,14 +234,19 @@ function DraftDisplay() {
         {(draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') &&
           <div>
             <div className={`stage_prompt team-${derivedTeamNumber}`}>
-              
               <p>{derivedStage}</p>
               <p className='timer'>{timeRemaining}</p>
             </div>
           </div>
         }
         {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
+        {(draftStatus == 'NOT_STARTED') &&
+          <input value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
+        }
         <DraftButton />
+        {(draftStatus == 'NOT_STARTED') &&
+          <input value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
+        }
       </div>
       {/* <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
