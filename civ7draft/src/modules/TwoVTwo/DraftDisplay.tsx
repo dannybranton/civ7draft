@@ -9,7 +9,7 @@ import type { Bans, DraftMeta, PROGRESS_STATUS } from '../../interfaces/draft/dr
 
 import { HOUSE_BANS } from '../../utilities/draft/constants';
 
-const DEFAULT_TOTAL_TIME_FOR_PICK = 5;
+const DEFAULT_TOTAL_TIME_FOR_PICK = 6;
 
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
@@ -28,10 +28,10 @@ function DraftDisplay() {
   let civilization_pick_stages = [
     [1, `${team1Name} ban a civilization`, 'CIVILIZATION'],
     [2, `${team2Name} ban a civilization`, 'CIVILIZATION'],
-    [1, `${team1Name} pick first civilization`, 'CIVILIZATION'],
-    [2, `${team2Name} pick first civilization`, 'CIVILIZATION'],
-    [1, `${team1Name} pick second civilization`, 'CIVILIZATION'],
-    [2, `${team2Name} pick second civilization`, 'CIVILIZATION']
+    [1, `${team1Name} pick a civilization`, 'CIVILIZATION'],
+    [2, `${team2Name} pick a civilization`, 'CIVILIZATION'],
+    [1, `${team1Name} pick a 2nd civilization`, 'CIVILIZATION'],
+    [2, `${team2Name} pick a 2nd civilization`, 'CIVILIZATION']
   ];
 
   const memento_ban_1 = [
@@ -47,10 +47,10 @@ function DraftDisplay() {
   const leader_pick_stages = [
     [2, `${team2Name} ban a leader`, 'LEADER'],
     [1, `${team1Name} ban a leader`, 'LEADER'],
-    [2, `${team2Name} pick first leader`, 'LEADER'],
-    [1, `${team1Name} pick first leader`, 'LEADER'],
-    [2, `${team2Name} pick second leader`, 'LEADER'],
-    [1, `${team1Name} pick second leader`, 'LEADER']
+    [2, `${team2Name} pick a leader`, 'LEADER'],
+    [1, `${team1Name} pick a leader`, 'LEADER'],
+    [2, `${team2Name} pick a second leader`, 'LEADER'],
+    [1, `${team1Name} pick a second leader`, 'LEADER']
   ];
 
   const pick_stages = [ ...civilization_pick_stages, ...memento_ban_1, ...leader_pick_stages, ...memento_ban_2 ];
@@ -107,6 +107,10 @@ function DraftDisplay() {
 
   const resumeDraft = () => {
     setDraftStatus('IN_PROGRESS');
+  }
+
+  const skip = () => {
+    setTimeRemaining(-3);
   }
 
   const restartDraft = () => {
@@ -186,22 +190,22 @@ function DraftDisplay() {
 
     switch (draftStatus) {
       case 'NOT_STARTED':
-        buttonAction = () => beginDraft();
+        buttonAction = beginDraft;
         buttonText = "Begin draft";
         break;
       case 'IN_PROGRESS':
         buttonClass = 'pause'
-        buttonAction = () => pauseDraft();
-        buttonText = "Pause draft";
+        buttonAction = pauseDraft;
+        buttonText = "Pause";
         break;
       case 'PAUSED':
         buttonClass = 'resume';
-        buttonAction = () => resumeDraft();
-        buttonText = "Resume draft";
+        buttonAction = resumeDraft;
+        buttonText = "Resume";
         break;
       case 'COMPLETED':
         buttonClass = 'restart';
-        buttonAction = () => restartDraft();
+        buttonAction = restartDraft;
         buttonText = "Restart draft";
         break;
     }
@@ -255,6 +259,9 @@ function DraftDisplay() {
         {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
         {(draftStatus == 'NOT_STARTED') &&
           <input value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
+        }
+        {(draftStatus == 'IN_PROGRESS') &&
+          <button className='skip_button' onClick={() => skip()}>Skip</button>
         }
         <DraftButton />
         {(draftStatus == 'NOT_STARTED') &&
