@@ -110,7 +110,8 @@ function DraftDisplay() {
   }
 
   const skip = () => {
-    nextStage();
+    //nextStage();
+    setTimeRemaining(-3);
   }
 
   const restartDraft = () => {
@@ -260,9 +261,9 @@ function DraftDisplay() {
         {(draftStatus == 'NOT_STARTED') &&
           <input value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
         }
-        {(draftStatus == 'IN_PROGRESS') &&
+        {/* {(draftStatus == 'IN_PROGRESS') &&
           <button className='skip_button' onClick={() => skip()}>Skip</button>
-        }
+        } */}
         <DraftButton />
         {(draftStatus == 'NOT_STARTED') &&
           <input value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
