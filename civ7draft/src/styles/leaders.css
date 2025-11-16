@@ -28,14 +28,7 @@
     background-color: #8c2942; /* ban color */
 }
 
-#leader_pool > img.banned {
-    background-color: #8c2942; /* ban color */
-    cursor: not-allowed;
-}
 
-#leader_pool > img.banned.housebanned {
-    background-color: #81888f; /* ban color */
-}
 
 #leader_pool > img.team1pick {
     background-color: #539942; /* ban color */
@@ -49,4 +42,20 @@
 
 #leader_pool > img.proposed {
     cursor: default;
+}
+
+
+#leader_pool > img.banned {
+    background-color: #8c2942; /* ban color */
+    cursor: not-allowed;
+}
+
+#leader_pool > img.banned.twomilitarybanned, #leader_pool > img.twomilitarybanned {
+    background-color: #81888f; /* ban color */
+    filter: opacity(0.5);
+}
+
+#leader_pool > img.banned.housebanned, #leader_pool > img.housebanned {
+    background-color: #81888f; /* ban color */
+    filter: opacity(1);
 }

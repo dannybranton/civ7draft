@@ -200,19 +200,6 @@ function DraftDisplay() {
 
   return (
     <>
-      <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
-        {(draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') &&
-          <div>
-            <div className={`stage_prompt team-${derivedTeamNumber}`}>
-              
-              <p>{derivedStage}</p>
-              <p className='timer'>{timeRemaining}</p>
-            </div>
-          </div>
-        }
-        {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
-        <DraftButton />
-      </div>
       <Civilizations
         onPickBan={onPickBan}
         team_number={derivedTeamNumber}
@@ -243,6 +230,19 @@ function DraftDisplay() {
         proposedPickBan={proposedPickBan}
         draftMeta={draftMeta}
       />
+      <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
+        {(draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') &&
+          <div>
+            <div className={`stage_prompt team-${derivedTeamNumber}`}>
+              
+              <p>{derivedStage}</p>
+              <p className='timer'>{timeRemaining}</p>
+            </div>
+          </div>
+        }
+        {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
+        <DraftButton />
+      </div>
       {/* <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
       <div>Picks Team2: {team2Picks.join(',')}</div>

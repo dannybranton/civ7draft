@@ -47,19 +47,23 @@ interface ILeadersProps {
   onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
 }
 
+const militaryLeaders = [
+  'amina', 'ashokaConqueror', 'charlemagne', 'edwardTeach', 'friedrichBaroque', 'friedrichOblique', 'ghengis', 'harriet', 'lakshmibai', 'napoleonrevolutionary', 'simonbolivar', 'tecumseh', 'trungtrac', 'xerxes'
+];
+
 const Leaders = ({team_number = 0, banning = false, enablePickBans = false, onPickBan, bans, picks, proposedPickBan, draftMeta}: ILeadersProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     if (enablePickBans) {
       const element = event.target as HTMLImageElement;
-      if (isPickable(element.id, picks, bans, draftMeta)) {
+      if (isPickable(element.id, team_number, picks, bans, draftMeta, proposedPickBan, militaryLeaders)) {
         onPickBan(element.id, team_number, banning);
       }
     }
   }
 
   const getClasses = (id: string): string => {
-    return pickBanClasses(id, picks, bans, draftMeta, enablePickBans, proposedPickBan, '');
+    return pickBanClasses(id, team_number, picks, bans, draftMeta, enablePickBans, proposedPickBan, '', militaryLeaders);
   }
 
   return (
