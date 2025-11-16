@@ -5,7 +5,9 @@ import { default as Leaders } from './Leaders'
 import { default as Mementos } from './Mementos'
 import { default as Civilizations } from './Civilizations';
 
-import type { CIVILIZATION, LEADER, MEMENTO, Bans, DraftMeta, Picks, PROGRESS_STATUS, STAGE_SELECTION_TYPE, NOT_STARTED } from '../../interfaces/draft/draft';
+import type { Bans, DraftMeta, PROGRESS_STATUS } from '../../interfaces/draft/draft';
+
+import { HOUSE_BANS } from '../../utilities/draft/constants';
 
 const DEFAULT_TOTAL_TIME_FOR_PICK = 5;
 
@@ -21,20 +23,6 @@ function DraftDisplay() {
   const [team1Picks, setTeam1Picks] = useState<string[]>([]);
   const [team2Bans, setTeam2Bans] = useState<string[]>([]);
   const [team2Picks, setTeam2Picks] = useState<string[]>([]);
-
-  const houseBans: string[] = [
-    'lafayette',
-    'napoleonemperor',
-    'harriet',
-    'miss',
-    'ming',
-    'egyptian',
-    'qajar',
-    'glass',
-    'antimachiavel',
-    'noteg',
-    'flag'
-  ];
 
   // Team 1 is Green Team, Team 2 is Blue Team
   let civilization_pick_stages = [
@@ -70,7 +58,7 @@ function DraftDisplay() {
   const derivedPickStage = pick_stages[currentStage];
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
-  const bans: Bans = { houseBans, draftBans: team1Bans.concat(team2Bans)}
+  const bans: Bans = { houseBans: HOUSE_BANS, draftBans: team1Bans.concat(team2Bans)}
   const draftMeta: DraftMeta = { draftStatus, proposedPickBan };
   const banning: boolean = derivedStage.includes('ban');
 
