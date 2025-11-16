@@ -141,7 +141,7 @@ const Mementos = ({
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     if (enablePickBans){
       const element = event.target as HTMLImageElement;
-      if (isPickable(element.id, team_number, picks, bans, draftMeta, proposedPickBan)) {
+      if (isPickable(element.id, team_number, picks, bans, draftMeta)) {
         onPickBan(element.id, team_number, banning);
       }
     }

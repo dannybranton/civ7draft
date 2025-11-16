@@ -1,6 +1,6 @@
 import './App.css'
 
-import { DraftDisplay, Picks } from './modules/TwoVTwo';
+import { DraftDisplay } from './modules/TwoVTwo';
 
 function App() {
 
