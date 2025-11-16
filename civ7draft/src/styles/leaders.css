@@ -12,6 +12,11 @@
     background-color: #81888f;
 }
 
+#leader_pool > img#sayyida:hover {
+    border: 6px solid gray;
+    box-sizing: border-box;
+}
+
 #leader_pool > img.pickable:hover {
     cursor: pointer;
 }
@@ -24,11 +29,21 @@
     background-color: #398cd4;
 }
 
+#leader_pool.team-1 > img#sayyida.pickable:hover {
+    border-color: #539942;
+}
+
+#leader_pool.team-2 > img#sayyida.pickable:hover {
+    border-color: #398cd4; /* pick color */
+}
+
 #leader_pool.banning > img.pickable:hover {
     background-color: #8c2942; /* ban color */
 }
 
-
+#leader_pool.banning > img#sayyida.pickable:hover {
+    border-color: #8c2942; /* ban color */
+}
 
 #leader_pool > img.team1pick {
     background-color: #539942; /* ban color */
@@ -38,6 +53,18 @@
 #leader_pool > img.team2pick {
     background-color: #398cd4; /* ban color */
     cursor: not-allowed;
+}
+
+#leader_pool > img#sayyida.team1pick {
+    border: none;
+    border-bottom: 16px solid #539942;
+    box-sizing: content-box;
+}
+
+#leader_pool > img#sayyida.team2pick {
+    border: none;
+    border-bottom: 16px solid #398cd4;
+    box-sizing: content-box;
 }
 
 #leader_pool > img.proposed {
