@@ -1,6 +1,7 @@
 #memento_pool {
     display: flex;
     flex-flow: row wrap;
+    margin: 8px;
 }
 
 #memento_pool > img {
