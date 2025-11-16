@@ -11,3 +11,7 @@ export const HOUSE_BANS: string[] = [
     'noteg',
     'flag'
 ];
+
+export const MILITARY_LEADERS = [
+  'amina', 'ashokaConqueror', 'charlemagne', 'edwardTeach', 'friedrichBaroque', 'friedrichOblique', 'ghengis', 'harriet', 'lakshmibai', 'napoleonrevolutionary', 'simonbolivar', 'tecumseh', 'trungtrac', 'xerxes'
+];

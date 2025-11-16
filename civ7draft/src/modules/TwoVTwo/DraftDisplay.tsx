@@ -110,8 +110,7 @@ function DraftDisplay() {
   }
 
   const skip = () => {
-    //nextStage();
-    setTimeRemaining(-3);
+    nextStage();
   }
 
   const restartDraft = () => {
@@ -261,9 +260,9 @@ function DraftDisplay() {
         {(draftStatus == 'NOT_STARTED') &&
           <input value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
         }
-        {/* {(draftStatus == 'IN_PROGRESS') &&
-          <button className='skip_button' onClick={() => skip()}>Skip</button>
-        } */}
+        {(draftStatus == 'IN_PROGRESS') &&
+          <button className='skip_button' onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
+        }
         <DraftButton />
         {(draftStatus == 'NOT_STARTED') &&
           <input value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
