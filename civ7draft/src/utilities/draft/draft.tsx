@@ -38,7 +38,10 @@ const isForbiddenTooManyMilitary = (id: string, team_number: number, picks: Pick
 
 const pickBanClasses = (id: string, team_number: number, picks: Picks, bans: Bans, draftMeta: DraftMeta, enablePickBans: boolean, proposedPickBan: string, existing_classes: string): string => {
     let classes = existing_classes;
-    if (isForbiddenTooManyMilitary(id, team_number, picks, draftMeta) && (draftMeta.draftStatus == 'IN_PROGRESS' || draftMeta.draftStatus == 'PAUSED')){
+    if (isForbiddenTooManyMilitary(id, team_number, picks, draftMeta) &&
+        (draftMeta.draftStatus == 'IN_PROGRESS' || draftMeta.draftStatus == 'PAUSED') &&
+        draftMeta.stageType == 'LEADER'
+    ){
         classes = classes + ' banned twomilitarybanned'
     }
 

@@ -5,7 +5,7 @@ import { default as Leaders } from './Leaders'
 import { default as Mementos } from './Mementos'
 import { default as Civilizations } from './Civilizations';
 
-import type { Bans, DraftMeta, PROGRESS_STATUS } from '../../interfaces/draft/draft';
+import type { Bans, DraftMeta, PROGRESS_STATUS, STAGE_SELECTION_TYPE } from '../../interfaces/draft/draft';
 
 import { HOUSE_BANS } from '../../utilities/draft/constants';
 
@@ -58,8 +58,9 @@ function DraftDisplay() {
   const derivedPickStage = pick_stages[currentStage];
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
+  const derivedStageType = derivedPickStage[2] as STAGE_SELECTION_TYPE;
   const bans: Bans = { houseBans: HOUSE_BANS, draftBans: team1Bans.concat(team2Bans)}
-  const draftMeta: DraftMeta = { draftStatus, proposedPickBan };
+  const draftMeta: DraftMeta = { draftStatus, proposedPickBan, stageType: derivedStageType };
   const banning: boolean = derivedStage.includes('ban');
 
   const beginDraft = () => {
