@@ -110,7 +110,7 @@ function DraftDisplay() {
   }
 
   const skip = () => {
-    setTimeRemaining(-3);
+    nextStage();
   }
 
   const restartDraft = () => {

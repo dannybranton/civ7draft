@@ -56,20 +56,20 @@ const Civilizations = ({
   return (
     <>
       <div id='civ_pool' className={`team-${team_number} ${banning ? 'banning' : ''}`}>
-        <img id='achaemenidPersia' src={ achaemenidPersia } onClick={handleClick} className={getClasses('achaemenidPersia')}></img>
-        <img id="aksumite" src={ aksumite } onClick={handleClick} className={getClasses('aksumite')}></img>
-        <img id="assyrian" src={ assyrian } onClick={handleClick} className={getClasses('assyrian')}></img>
-        <img id="carthaginian" src={ carthaginian } onClick={handleClick} className={getClasses('carthaginian')}></img>
-        <img id="egyptian" src={ egyptian } onClick={handleClick} className={getClasses('egyptian')}></img>
-        <img id="greek" src={ greek } onClick={handleClick} className={getClasses('greek')}></img>
-        <img id="han" src={ han } onClick={handleClick} className={getClasses('han')}></img>
-        <img id="khmer" src={ khmer } onClick={handleClick} className={getClasses('khmer')}></img>
-        <img id="mauryan" src={ mauryan } onClick={handleClick} className={getClasses('mauryan')}></img>
-        <img id="maya" src={ maya } onClick={handleClick} className={getClasses('maya')}></img>
-        <img id="miss" src={ miss } onClick={handleClick} className={getClasses('miss')}></img>
-        <img id="roman" src={ roman } onClick={handleClick} className={getClasses('roman')}></img>
-        <img id="silla" src={ silla } onClick={handleClick} className={getClasses('silla')}></img>
-        <img id="tongan" src={ tongan } onClick={handleClick} className={getClasses('tongan')}></img>
+        <img id='achaemenidPersia' title='Achaemenid Persian' src={ achaemenidPersia } onClick={handleClick} className={getClasses('achaemenidPersia')}></img>
+        <img id="aksumite" title='Aksumite' src={ aksumite } onClick={handleClick} className={getClasses('aksumite')}></img>
+        <img id="assyrian" title='Assyrian' src={ assyrian } onClick={handleClick} className={getClasses('assyrian')}></img>
+        <img id="carthaginian" title='Carthaginian' src={ carthaginian } onClick={handleClick} className={getClasses('carthaginian')}></img>
+        <img id="egyptian" title='Egyptian' src={ egyptian } onClick={handleClick} className={getClasses('egyptian')}></img>
+        <img id="greek" title='Greek' src={ greek } onClick={handleClick} className={getClasses('greek')}></img>
+        <img id="han" title='Han' src={ han } onClick={handleClick} className={getClasses('han')}></img>
+        <img id="khmer" title='Khmer' src={ khmer } onClick={handleClick} className={getClasses('khmer')}></img>
+        <img id="mauryan" title='Mauryan' src={ mauryan } onClick={handleClick} className={getClasses('mauryan')}></img>
+        <img id="maya" title='Maya' src={ maya } onClick={handleClick} className={getClasses('maya')}></img>
+        <img id="miss" title='Mississippian' src={ miss } onClick={handleClick} className={getClasses('miss')}></img>
+        <img id="roman" title='Roman' src={ roman } onClick={handleClick} className={getClasses('roman')}></img>
+        <img id="silla" title='Silla' src={ silla } onClick={handleClick} className={getClasses('silla')}></img>
+        <img id="tongan" title='Tongan' src={ tongan } onClick={handleClick} className={getClasses('tongan')}></img>
 
       </div>
     </>
