@@ -62,3 +62,11 @@
 #rules {
     margin: 0 24px;
 }
+
+.draft_completed {
+    display: none;
+}
+
+.draft_completed.COMPLETED {
+    display: block;
+}

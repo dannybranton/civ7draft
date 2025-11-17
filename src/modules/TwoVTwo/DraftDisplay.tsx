@@ -219,7 +219,7 @@ function DraftDisplay() {
           <p>{derivedStage}</p>
           <p className='timer'>{timeRemaining}</p>
         </div>
-        {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
+        <p className={`draft_completed ${draftStatus}`}>Draft completed!</p>
         <button className='draft_button format' onClick={() => viewFormatSwitch()}>{viewFormat ? 'Draft' : 'Rules'}</button>
         {(draftStatus == 'NOT_STARTED') &&
           <input id='team1_name' value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
