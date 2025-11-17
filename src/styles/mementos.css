@@ -76,13 +76,17 @@
 }
 #memento_pool.COMPLETED img.endscreen.team1ban {
     order: 0;
+    cursor: default;
 }
 #memento_pool.COMPLETED img.endscreen.team1pick {
     order: 1;
+    cursor: default;
 }
 #memento_pool.COMPLETED img.endscreen.team2pick {
     order: 2;
+    cursor: default;
 }
 #memento_pool.COMPLETED img.endscreen.team2ban {
     order: 3;
+    cursor: default;
 }
