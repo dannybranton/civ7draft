@@ -25,7 +25,7 @@
 }
 
 .stage_prompt {
-    display: flex;
+    display: none;
     place-content: center;
     color: white;
     width: 100vw;
@@ -37,6 +37,10 @@
 
 .stage_prompt.team-2 {
     background-color: #398cd4; /* pick color */
+}
+
+.stage_prompt.PAUSED, .stage_prompt.IN_PROGRESS {
+    display: flex;
 }
 
 .timer {

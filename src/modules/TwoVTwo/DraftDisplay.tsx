@@ -215,14 +215,10 @@ function DraftDisplay() {
       </>
       }
       <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
-        {(draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') &&
-          <div>
-            <div className={`stage_prompt team-${derivedTeamNumber}`}>
-              <p>{derivedStage}</p>
-              <p className='timer'>{timeRemaining}</p>
-            </div>
-          </div>
-        }
+        <div className={`stage_prompt team-${derivedTeamNumber} ${draftStatus}`}>
+          <p>{derivedStage}</p>
+          <p className='timer'>{timeRemaining}</p>
+        </div>
         {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
         <button className='draft_button format' onClick={() => viewFormatSwitch()}>{viewFormat ? 'Draft' : 'Rules'}</button>
         {(draftStatus == 'NOT_STARTED') &&
