@@ -9,10 +9,9 @@ import { default as Format } from './Format';
 
 import type { Bans, DraftMeta, PROGRESS_STATUS, STAGE_SELECTION_TYPE } from '../../interfaces/draft/draft';
 
-import { HOUSE_BANS } from '../../utilities/draft/constants';
+import { HOUSE_BANS, DEFAULT_TOTAL_TIME_FOR_PICK } from '../../utilities/draft/constants';
 import { getPickOrder, getRandomInt } from '../../utilities/draft/pickorder';
-
-const DEFAULT_TOTAL_TIME_FOR_PICK = 25;
+import { getTotalTimeForPickBan } from '../../utilities/draft/draft';
 
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
@@ -44,6 +43,7 @@ function DraftDisplay() {
   const beginDraft = () => {
     setDraftStatus("IN_PROGRESS");
     setViewFormat(false);
+    setTimeRemaining(getTotalTimeForPickBan(draftMeta, banning));
   }
 
   const nextStage = () => {
@@ -72,7 +72,7 @@ function DraftDisplay() {
       }
 
       setCurrentStage(currentStage + 1);
-      setTimeRemaining(DEFAULT_TOTAL_TIME_FOR_PICK);
+      setTimeRemaining(getTotalTimeForPickBan(draftMeta, banning));
       setProposedPickBan('');
     } else {
       setDraftStatus("COMPLETED");
@@ -143,7 +143,7 @@ function DraftDisplay() {
     let newTeam2Bans = team2Bans;
     let newTeam2Picks = team2Picks;
 
-    if (draftStatus == 'IN_PROGRESS'){
+    if (draftStatus == 'IN_PROGRESS' || draftStatus == 'PAUSED'){
       // Pick has been proposed, need to remove it if a different selection is made
       if (proposedPickBan.length > 0){
         switch (teamNumber) {
