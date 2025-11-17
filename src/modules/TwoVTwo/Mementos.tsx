@@ -219,7 +219,7 @@ const Mementos = ({
         <img id="letterjamaica" title="Letter to Jamaica" src={ letterjamaica } onClick={handleClick} className={getClasses('letterjamaica')}></img>
         <img id="lion" title="Lion Capital" src={ lion } onClick={handleClick} className={getClasses('lion')}></img>
         <img id="lotus" title="Lotus Blossom" src={ lotus } onClick={handleClick} className={getClasses('lotus')}></img>
-        <img id="lydian" title="v" src={ lydian } onClick={handleClick} className={getClasses('lydian')}></img>
+        <img id="lydian" title="Lydian Lion" src={ lydian } onClick={handleClick} className={getClasses('lydian')}></img>
         <img id="mascapaycha" title="Mascapaycha" src={ mascapaycha } onClick={handleClick} className={getClasses('mascapaycha')}></img>
         <img id="medicine" title="Medicine Chest" src={ medicine } onClick={handleClick} className={getClasses('medicine')}></img>
         <img id="merchant" title="Merchant's Saddle" src={ merchant } onClick={handleClick} className={getClasses('merchant')}></img>
