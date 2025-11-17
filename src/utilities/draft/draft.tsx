@@ -1,9 +1,9 @@
 import type { DraftMeta, Bans, Picks } from "../../interfaces/draft/draft";
 
-import { MILITARY_LEADERS } from "./constants";
+import { MILITARY_LEADERS, DEFAULT_TOTAL_TIME_FOR_PICK, DEFAULT_TOTAL_TIME_FOR_BAN_CIVILIZATION, DEFAULT_TOTAL_TIME_FOR_PICK_CIVILIZATION, DEFAULT_TOTAL_TIME_FOR_PICK_LEADER, DEFAULT_TOTAL_TIME_FOR_BAN_LEADER, DEFAULT_TOTAL_TIME_FOR_BAN_MEMENTO, DEFAULT_TOTAL_TIME_FOR_PICK_MEMENTO } from "./constants";
 
 const isPickable = (id: string, team_number: number, picks: Picks, bans: Bans, draftMeta: DraftMeta): boolean => {
-    return draftMeta.draftStatus == 'IN_PROGRESS' &&
+    return (draftMeta.draftStatus == 'IN_PROGRESS' || draftMeta.draftStatus == 'PAUSED') &&
         !(picks.team1Picks.includes(id) ||
         picks.team2Picks.includes(id) ||
         bans.draftBans.includes(id) ||
@@ -53,9 +53,26 @@ const pickBanClasses = (id: string, team_number: number, picks: Picks, bans: Ban
     classes = id == proposedPickBan ? classes + ' proposed' : classes;
 
     return classes;
-  }
+}
+
+const getTotalTimeForPickBan = (draftMeta: DraftMeta, banning: boolean) => {
+    let time = DEFAULT_TOTAL_TIME_FOR_PICK;
+    switch (draftMeta.stageType) {
+        case "CIVILIZATION":
+            time = banning ? DEFAULT_TOTAL_TIME_FOR_BAN_CIVILIZATION : DEFAULT_TOTAL_TIME_FOR_PICK_CIVILIZATION
+            break;
+        case "LEADER":
+            time = banning ? DEFAULT_TOTAL_TIME_FOR_BAN_LEADER : DEFAULT_TOTAL_TIME_FOR_PICK_LEADER
+            break;
+        case "MEMENTO":
+            time = banning ? DEFAULT_TOTAL_TIME_FOR_BAN_MEMENTO : DEFAULT_TOTAL_TIME_FOR_PICK_MEMENTO
+            break;
+    }
+    return time;
+}
 
 export {
     isPickable,
-    pickBanClasses
+    pickBanClasses,
+    getTotalTimeForPickBan
 };
