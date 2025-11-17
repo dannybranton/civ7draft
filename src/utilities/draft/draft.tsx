@@ -46,11 +46,15 @@ const pickBanClasses = (id: string, team_number: number, picks: Picks, bans: Ban
     }
 
     classes = bans.draftBans.includes(id) ? classes + ' banned' : classes;
+    classes = bans.team1Bans.includes(id) ? classes + ' team1ban' : classes;
+    classes = bans.team2Bans.includes(id) ? classes + ' team2ban' : classes;
     classes = bans.houseBans.includes(id) ? classes + ' banned housebanned' : classes;
     classes = picks.team1Picks.includes(id) ? classes + ' team1pick' : classes;
     classes = picks.team2Picks.includes(id) ? classes + ' team2pick' : classes;
     classes = enablePickBans && isPickable(id, team_number, picks, bans, draftMeta) ? classes + ' pickable' : classes;
     classes = id == proposedPickBan ? classes + ' proposed' : classes;
+
+    classes = (picks.team1Picks.includes(id) || picks.team2Picks.includes(id) || bans.draftBans.includes(id)) ? classes + ' endscreen' : classes;
 
     return classes;
 }

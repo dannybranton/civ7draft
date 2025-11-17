@@ -1,6 +1,8 @@
 export interface Bans {
   houseBans: string[];
   draftBans: string[];
+  team1Bans: string[];
+  team2Bans: string[];
 }
 
 export interface Picks {

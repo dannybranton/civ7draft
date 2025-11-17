@@ -272,9 +272,9 @@ const Mementos = ({
 
   return (
     <>
-      <label id='memento_filter_label' htmlFor='memento_filter'>Memento Search</label>
-      <input id='memento_filter' name='memento_filter' value={mementoFilter} onChange={(e) => updateMementoFilter(e.target.value)} />
-      <div id='memento_pool' className={`team-${team_number} ${banning ? 'banning' : ''}`}>
+      <label id='memento_filter_label' htmlFor='memento_filter' className={`${draftMeta.draftStatus}`}>Memento Search</label>
+      <input id='memento_filter' name='memento_filter' value={mementoFilter} className={`${draftMeta.draftStatus}`} onChange={(e) => updateMementoFilter(e.target.value)} />
+      <div id='memento_pool' className={`team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus}`}>
         {...mementoImages.filter((value) => {
           return mementoFilter ? value.props.title.toLowerCase().includes(mementoFilter.toLowerCase()) : true;
         })}

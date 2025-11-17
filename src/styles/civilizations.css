@@ -59,3 +59,25 @@
 #civ_pool > img.proposed {
     cursor: default;
 }
+
+#civ_pool.COMPLETED {
+    justify-content: center;
+}
+#civ_pool.COMPLETED img {
+  display: none;
+}
+#civ_pool.COMPLETED img.endscreen {
+  display: block;
+}
+#civ_pool.COMPLETED img.endscreen.team1ban {
+    order: 0;
+}
+#civ_pool.COMPLETED img.endscreen.team1pick {
+    order: 1;
+}
+#civ_pool.COMPLETED img.endscreen.team2pick {
+    order: 2;
+}
+#civ_pool.COMPLETED img.endscreen.team2ban {
+    order: 3;
+}
