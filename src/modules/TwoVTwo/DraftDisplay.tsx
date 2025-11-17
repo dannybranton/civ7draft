@@ -228,13 +228,11 @@ function DraftDisplay() {
         {(draftStatus == 'NOT_STARTED') &&
           <input id='team1_name' value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
         }
-        {(draftStatus == 'IN_PROGRESS') &&
-          <button className='draft_button skip' onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
-        }
+        <button className={`draft_button skip next ${draftStatus}`} onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
         <button className={`draft_button begin ${draftStatus}`} onClick={beginDraft}>Begin draft</button>
         <button className={`draft_button pause ${draftStatus}`} onClick={pauseDraft}>Pause</button>
         <button className={`draft_button resume ${draftStatus}`} onClick={resumeDraft}>Resume</button>
-        <button className={`draft_button restart ${draftStatus}`} onClick={beginDraft}>Restart draft</button>
+        <button className={`draft_button restart ${draftStatus}`} onClick={restartDraft}>Restart draft</button>
         {(draftStatus == 'NOT_STARTED') &&
           <input id='team2_name' value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
         }
