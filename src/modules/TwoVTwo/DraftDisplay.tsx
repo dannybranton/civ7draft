@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import '../../styles/draft_display.css';
+import '../../styles/draft_display_buttons.css';
 
 import { default as Leaders } from './Leaders'
 import { default as Mementos } from './Mementos'
@@ -176,38 +177,6 @@ function DraftDisplay() {
     }
   }
 
-  const DraftButton = () => {
-    let buttonAction = () => {};
-    let buttonText = "";
-    let buttonClass = "";
-
-    switch (draftStatus) {
-      case 'NOT_STARTED':
-        buttonAction = beginDraft;
-        buttonText = "Begin draft";
-        break;
-      case 'IN_PROGRESS':
-        buttonClass = 'pause'
-        buttonAction = pauseDraft;
-        buttonText = "Pause";
-        break;
-      case 'PAUSED':
-        buttonClass = 'resume';
-        buttonAction = resumeDraft;
-        buttonText = "Resume";
-        break;
-      case 'COMPLETED':
-        buttonClass = 'restart';
-        buttonAction = restartDraft;
-        buttonText = "Restart draft";
-        break;
-    }
-
-    return <>
-      <button className={`draft_button ${buttonClass}`} onClick={buttonAction}>{buttonText}</button>
-    </>
-  }
-
   return (
     <>
       
@@ -246,23 +215,20 @@ function DraftDisplay() {
       </>
       }
       <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
-        {(draftStatus == 'PAUSED' || draftStatus == 'IN_PROGRESS') &&
-          <div>
-            <div className={`stage_prompt team-${derivedTeamNumber}`}>
-              <p>{derivedStage}</p>
-              <p className='timer'>{timeRemaining}</p>
-            </div>
-          </div>
-        }
-        {draftStatus == 'COMPLETED' && <p>Draft completed!</p>}
-        <button className='format_button' onClick={() => viewFormatSwitch()}>{viewFormat ? 'Draft' : 'Rules'}</button>
+        <div className={`stage_prompt team-${derivedTeamNumber} ${draftStatus}`}>
+          <p>{derivedStage}</p>
+          <p className='timer'>{timeRemaining}</p>
+        </div>
+        <p className={`draft_completed ${draftStatus}`}>Draft completed!</p>
+        <button className='draft_button format' onClick={() => viewFormatSwitch()}>{viewFormat ? 'Draft' : 'Rules'}</button>
         {(draftStatus == 'NOT_STARTED') &&
           <input id='team1_name' value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
         }
-        {(draftStatus == 'IN_PROGRESS') &&
-          <button className='skip_button' onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
-        }
-        <DraftButton />
+        <button className={`draft_button skip next ${draftStatus}`} onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
+        <button className={`draft_button begin ${draftStatus}`} onClick={beginDraft}>Begin draft</button>
+        <button className={`draft_button pause ${draftStatus}`} onClick={pauseDraft}>Pause</button>
+        <button className={`draft_button resume ${draftStatus}`} onClick={resumeDraft}>Resume</button>
+        <button className={`draft_button restart ${draftStatus}`} onClick={restartDraft}>Restart draft</button>
         {(draftStatus == 'NOT_STARTED') &&
           <input id='team2_name' value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
         }

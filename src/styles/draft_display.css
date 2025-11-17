@@ -25,7 +25,7 @@
 }
 
 .stage_prompt {
-    display: flex;
+    display: none;
     place-content: center;
     color: white;
     width: 100vw;
@@ -39,35 +39,15 @@
     background-color: #398cd4; /* pick color */
 }
 
+.stage_prompt.PAUSED, .stage_prompt.IN_PROGRESS {
+    display: flex;
+}
+
 .timer {
     font-size: 32px;
     font-weight: 600;
     margin: 4px 24px 0 24px;
     line-height: 44px;
-}
-
-.draft_button.pause {
-    position: fixed;
-    right: 0;
-    margin: 9px 8px 8px 8px;
-}
-
-.draft_button.resume, .draft_button.pause, .draft_button.restart {
-    position: fixed;
-    right: 0;
-    margin: 9px 8px 8px 8px;
-}
-
-.skip_button {
-    position: fixed;
-    right: 94px;
-    margin: 9px 8px 8px 8px;
-}
-
-.format_button {
-    position: fixed;
-    left: 0;
-    margin: 9px 8px 8px 8px;
 }
 
 #format {
@@ -81,4 +61,12 @@
 
 #rules {
     margin: 0 24px;
+}
+
+.draft_completed {
+    display: none;
+}
+
+.draft_completed.COMPLETED {
+    display: block;
 }
