@@ -3,3 +3,13 @@
     margin-top: auto;
     place-items: flex-end;
 }
+
+#picks_pool img {
+    display: none;
+}
+#team1picks img.team1pick, #team1picks img.team1ban {
+    display: block;
+}
+#team2picks img.team2pick, #team2picks img.team2ban {
+    display: block;
+}

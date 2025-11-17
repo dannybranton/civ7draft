@@ -18,7 +18,7 @@ import roman from '../../assets/Civilizations/Roman_29.webp';
 import silla from '../../assets/Civilizations/Silla_29.webp';
 import tongan from '../../assets/Civilizations/Tongan_29.webp';
 
-interface CivilizationsProps {
+export interface ICivilizationsProps {
   bans: Bans;
   enablePickBans: boolean;
   picks: Picks;
@@ -38,7 +38,7 @@ const Civilizations = ({
     picks,
     proposedPickBan,
     draftMeta
-  }: CivilizationsProps) => {
+  }: ICivilizationsProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     if (enablePickBans){

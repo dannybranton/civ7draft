@@ -12,6 +12,7 @@ import type { Bans, DraftMeta, PROGRESS_STATUS, STAGE_SELECTION_TYPE } from '../
 import { HOUSE_BANS, DEFAULT_TOTAL_TIME_FOR_PICK } from '../../utilities/draft/constants';
 import { getPickOrder, getRandomInt } from '../../utilities/draft/pickorder';
 import { getTotalTimeForPickBan } from '../../utilities/draft/draft';
+import Picks from './Picks';
 
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
@@ -47,7 +48,6 @@ function DraftDisplay() {
   }
 
   const nextStage = () => {
-    
     if (proposedPickBan == ''){ //when advancing stages, if no pick has been made, make one
       switch (derivedPickStage[2]) {
         case 'LEADER':
@@ -182,6 +182,16 @@ function DraftDisplay() {
       
       {viewFormat ? <Format /> :
       <>
+        <div className={`team_names ${draftStatus}`}>
+          <div>
+            <label id='team1_name_label' htmlFor='team1_name' className={`${draftMeta.draftStatus}`}>Team 1 Name</label>
+            <input id='team1_name' value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
+          </div>
+          <div>
+            <label id='team2_name_label' htmlFor='team2_name' className={`${draftMeta.draftStatus}`}>Team 2 Name</label>
+            <input id='team2_name' value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
+          </div>
+        </div>
         <Civilizations
           onPickBan={onPickBan}
           team_number={derivedTeamNumber}
@@ -215,24 +225,31 @@ function DraftDisplay() {
       </>
       }
       <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
+        
         <div className={`stage_prompt team-${derivedTeamNumber} ${draftStatus}`}>
           <p>{derivedStage}</p>
           <p className='timer'>{timeRemaining}</p>
         </div>
         <p className={`draft_completed ${draftStatus}`}>Draft completed!</p>
         <button className='draft_button format' onClick={() => viewFormatSwitch()}>{viewFormat ? 'Draft' : 'Rules'}</button>
-        {(draftStatus == 'NOT_STARTED') &&
-          <input id='team1_name' value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
-        }
         <button className={`draft_button skip next ${draftStatus}`} onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
         <button className={`draft_button begin ${draftStatus}`} onClick={beginDraft}>Begin draft</button>
         <button className={`draft_button pause ${draftStatus}`} onClick={pauseDraft}>Pause</button>
         <button className={`draft_button resume ${draftStatus}`} onClick={resumeDraft}>Resume</button>
         <button className={`draft_button restart ${draftStatus}`} onClick={restartDraft}>Restart draft</button>
-        {(draftStatus == 'NOT_STARTED') &&
-          <input id='team2_name' value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
-        }
       </div>
+      <Picks civilizations = {
+          <Civilizations
+          onPickBan={onPickBan}
+          team_number={derivedTeamNumber}
+          banning={derivedStage.includes('ban')}
+          enablePickBans={derivedPickStage[2] == 'CIVILIZATION'}
+          bans={bans}
+          picks={{team1Picks, team2Picks}}
+          proposedPickBan={proposedPickBan}
+          draftMeta={draftMeta}
+        />
+      } />
       {/* <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
       <div>Picks Team2: {team2Picks.join(',')}</div>

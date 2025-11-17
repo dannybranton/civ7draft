@@ -70,3 +70,23 @@
 .draft_completed.COMPLETED {
     display: block;
 }
+
+.team_names {
+    display: none;
+}
+.team_names.NOT_STARTED {
+    display: flex;
+    flex-flow: row wrap;
+}
+.team_names > div {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0 8px;
+}
+.team_names input {
+    height: 20px;
+    width: 100%;
+    min-width: 100px;
+    max-width: 292px;
+    background: #EBFAFC;
+}
