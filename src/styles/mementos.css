@@ -64,3 +64,29 @@
 #memento_filter_label {
     margin-left: 8px;
 }
+
+#memento_pool.COMPLETED {
+    justify-content: center;
+}
+#memento_pool.COMPLETED img, #memento_filter.COMPLETED, #memento_filter_label.COMPLETED {
+  display: none;
+}
+#memento_pool.COMPLETED img.endscreen {
+  display: block;
+}
+#memento_pool.COMPLETED img.endscreen.team1ban {
+    order: 0;
+    cursor: default;
+}
+#memento_pool.COMPLETED img.endscreen.team1pick {
+    order: 1;
+    cursor: default;
+}
+#memento_pool.COMPLETED img.endscreen.team2pick {
+    order: 2;
+    cursor: default;
+}
+#memento_pool.COMPLETED img.endscreen.team2ban {
+    order: 3;
+    cursor: default;
+}

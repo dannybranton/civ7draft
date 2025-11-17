@@ -36,7 +36,7 @@ function DraftDisplay() {
   const derivedTeamNumber = derivedPickStage[0] as number;
   const derivedStage = derivedPickStage[1] as string;
   const derivedStageType = derivedPickStage[2] as STAGE_SELECTION_TYPE;
-  const bans: Bans = { houseBans: HOUSE_BANS, draftBans: team1Bans.concat(team2Bans)}
+  const bans: Bans = { houseBans: HOUSE_BANS, draftBans: team1Bans.concat(team2Bans), team1Bans, team2Bans}
   const draftMeta: DraftMeta = { draftStatus, proposedPickBan, stageType: derivedStageType };
   const banning: boolean = derivedStage.includes('ban');
 
@@ -47,30 +47,30 @@ function DraftDisplay() {
   }
 
   const nextStage = () => {
-    if (currentStage < pick_stages.length - 1){
-      if (proposedPickBan == ''){ //when advancing stages, if no pick has been made, make one
-        switch (derivedPickStage[2]) {
-          case 'LEADER':
-            let numPickableLeaders = document.querySelectorAll('#leader_pool > .pickable').length
-            let randomLeaderNum = Math.floor(Math.random() * numPickableLeaders);
-            const randomLeader = document.querySelectorAll('#leader_pool > img.pickable')[randomLeaderNum].getAttribute('id') as string;
-            onPickBan(randomLeader, derivedTeamNumber, banning);
-            break;
-          case 'CIVILIZATION':
-            let numPickableCivs = document.querySelectorAll('#civ_pool > .pickable').length
-            let randomCivNum = Math.floor(Math.random() * numPickableCivs);
-            const randomCiv = document.querySelectorAll('#civ_pool > img.pickable')[randomCivNum].getAttribute('id') as string;
-            onPickBan(randomCiv, derivedTeamNumber, banning);
-            break;
-          case 'MEMENTO':
-            let numPickableMementos = document.querySelectorAll('#memento_pool > .pickable').length
-            let randomMementoNum = Math.floor(Math.random() * numPickableMementos);
-            const randomMemento = document.querySelectorAll('#memento_pool > img.pickable')[randomMementoNum].getAttribute('id') as string;
-            onPickBan(randomMemento, derivedTeamNumber, banning);
-            break;
-        }
+    
+    if (proposedPickBan == ''){ //when advancing stages, if no pick has been made, make one
+      switch (derivedPickStage[2]) {
+        case 'LEADER':
+          let numPickableLeaders = document.querySelectorAll('#leader_pool > img.pickable').length
+          let randomLeaderNum = Math.floor(Math.random() * numPickableLeaders);
+          const randomLeader = document.querySelectorAll('#leader_pool > img.pickable')[randomLeaderNum].getAttribute('id') as string;
+          onPickBan(randomLeader, derivedTeamNumber, banning);
+          break;
+        case 'CIVILIZATION':
+          let numPickableCivs = document.querySelectorAll('#civ_pool > img.pickable').length
+          let randomCivNum = Math.floor(Math.random() * numPickableCivs);
+          const randomCiv = document.querySelectorAll('#civ_pool > img.pickable')[randomCivNum].getAttribute('id') as string;
+          onPickBan(randomCiv, derivedTeamNumber, banning);
+          break;
+        case 'MEMENTO':
+          let numPickableMementos = document.querySelectorAll('#memento_pool > img.pickable').length
+          let randomMementoNum = Math.floor(Math.random() * numPickableMementos);
+          const randomMemento = document.querySelectorAll('#memento_pool > img.pickable')[randomMementoNum].getAttribute('id') as string;
+          onPickBan(randomMemento, derivedTeamNumber, banning);
+          break;
       }
-
+    }
+    if (currentStage < pick_stages.length - 1){
       setCurrentStage(currentStage + 1);
       setTimeRemaining(getTotalTimeForPickBan(draftMeta, banning));
       setProposedPickBan('');
