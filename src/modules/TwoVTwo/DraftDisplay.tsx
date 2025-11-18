@@ -184,16 +184,6 @@ function DraftDisplay() {
       
       {viewFormat ? <Format /> :
       <>
-        <div className={`team_names ${draftStatus}`}>
-          <div>
-            <label id='team1_name_label' htmlFor='team1_name' className={`${draftMeta.draftStatus}`}>Team 1 Name</label>
-            <input id='team1_name' value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
-          </div>
-          <div>
-            <label id='team2_name_label' htmlFor='team2_name' className={`${draftMeta.draftStatus}`}>Team 2 Name</label>
-            <input id='team2_name' value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
-          </div>
-        </div>
         <Civilizations
           onPickBan={onPickBan}
           team_number={derivedTeamNumber}
@@ -277,6 +267,9 @@ function DraftDisplay() {
           draftMeta={draftMeta}
         />}
         teamToDisplay={'team1'}
+        teamName={team1Name}
+        draftMeta={draftMeta}
+        setTeamName={setTeam1Name}
       />
       <Picks
         civilizations={<Civilizations
@@ -310,6 +303,9 @@ function DraftDisplay() {
           draftMeta={draftMeta}
         />}
         teamToDisplay={'team2'}
+        teamName={team2Name}
+        draftMeta={draftMeta}
+        setTeamName={setTeam2Name}
       />
       {/* <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
