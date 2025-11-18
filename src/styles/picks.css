@@ -4,6 +4,12 @@
     place-items: flex-end;
 }
 
-#picks_pool #team1picks img:not(.displayable), #picks_pool #team2picks img:not(.displayable) {
+.picks_pool #team1picks img:not(.displayable), .picks_pool #team2picks img:not(.displayable) {
     display: none;
+}
+
+.picks_pool {
+    background: #7d794d;
+    flex: 0 0 200px;
+    border: 5px solid #213547;
 }
