@@ -15,18 +15,24 @@ const Picks = ({ civilizations, leaders, mementos, teamToDisplay, draftMeta, tea
 
   return (
     <>
-      <div className={`picks_pool ${teamToDisplay}`}>
-        <div className={`team_names ${draftMeta.draftStatus}`}>
-          <div>
-            <label id={`${teamToDisplay}_name_label`} htmlFor={`${teamToDisplay}_name`} className={`${draftMeta.draftStatus}`}>Team Name</label>
-            <input id={`${teamToDisplay}_name`} value={teamName} onChange={(e) => setTeamName(e.target.value)} />
+      <div className='picks_pool_container'>
+        <div className={`team_color_slice ${teamToDisplay}`}></div>
+        <div className={`picks_pool ${teamToDisplay}`}>
+          <div className={`team_names selection ${draftMeta.draftStatus}`}>
+            <div>
+              <label id={`${teamToDisplay}_name_label`} htmlFor={`${teamToDisplay}_name`} className={`${draftMeta.draftStatus}`}>Team Name</label>
+              <input id={`${teamToDisplay}_name`} value={teamName} onChange={(e) => setTeamName(e.target.value)} />
+            </div>
           </div>
-        </div>
-        {/* <img loading="lazy" title="ADA LOVELACE" src="https://assets.2k.com/1a6ngf98576c/7HBQeH6cuEmu6bxYShwuAK/515872ebe8564f3ca1c5a4fdf899a227/Leaders_400x240Ada-Lovelace.jpg" height="240" width="400" alt="ADA LOVELACE"></img> */}
-        <div id={`${teamToDisplay}picks`}>
-          {civilizations}
-          {leaders}
-          {mementos}
+          <div className={`team_names ${draftMeta.draftStatus}`}>
+            <div className="selectedname">{teamName}</div>
+          </div>
+          {/* <img loading="lazy" title="ADA LOVELACE" src="https://assets.2k.com/1a6ngf98576c/7HBQeH6cuEmu6bxYShwuAK/515872ebe8564f3ca1c5a4fdf899a227/Leaders_400x240Ada-Lovelace.jpg" height="240" width="400" alt="ADA LOVELACE"></img> */}
+          <div id={`${teamToDisplay}picks`}>
+            {civilizations}
+            {leaders}
+            {mementos}
+          </div>
         </div>
       </div>
     </>
