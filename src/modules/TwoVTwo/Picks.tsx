@@ -15,7 +15,7 @@ const Picks = ({ civilizations, leaders, mementos, teamToDisplay, draftMeta, tea
 
   return (
     <>
-      <div className="picks_pool">
+      <div className={`picks_pool ${teamToDisplay}`}>
         <div className={`team_names ${draftMeta.draftStatus}`}>
           <div>
             <label id={`${teamToDisplay}_name_label`} htmlFor={`${teamToDisplay}_name`} className={`${draftMeta.draftStatus}`}>Team Name</label>

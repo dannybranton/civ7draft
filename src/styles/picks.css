@@ -9,7 +9,14 @@
 }
 
 .picks_pool {
-    background: #7d794d;
-    flex: 0 0 200px;
+    flex: 0 0 232px;
     border: 5px solid #213547;
+}
+
+.picks_pool.team1 {
+    border: 8px solid #539942;
+}
+
+.picks_pool.team2 {
+    border: 8px solid #398cd4;
 }

@@ -1,12 +1,12 @@
 #leader_pool {
     display: flex;
     flex-flow: row wrap;
-    margin: 8px;
 }
 
 #leader_pool > img {
     width: 100px;
     height: 100px;
+    margin: 8px;
 }
 
 #leader_pool > img:hover {

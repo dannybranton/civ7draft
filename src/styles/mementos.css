@@ -1,12 +1,16 @@
 #memento_pool {
     display: flex;
     flex-flow: row wrap;
-    margin: 8px;
+}
+
+#the_draft > #memento_pool {
+    margin-top: 8px;
 }
 
 #memento_pool > img {
     width: 100px;
     height: 100px;
+    margin: 8px;
 }
 
 #memento_pool > img:hover {
