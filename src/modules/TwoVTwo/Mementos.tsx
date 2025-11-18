@@ -126,6 +126,7 @@ interface MementosProps {
   draftMeta: DraftMeta;
   team_number: number,
   banning: boolean,
+  mementoFilter?: string,
   onPickBan: (pickedId: string, teamNumber: number, banning: boolean) => void;
 }
 
@@ -133,14 +134,13 @@ const Mementos = ({
     team_number = 0,
     banning = false,
     enablePickBans = false,
+    mementoFilter,
     onPickBan,
     bans,
     picks,
     proposedPickBan,
     draftMeta
   }: MementosProps) => {
-
-  const [mementoFilter, updateMementoFilter] = useState('');
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     if (enablePickBans){
@@ -272,8 +272,6 @@ const Mementos = ({
 
   return (
     <>
-      <label id='memento_filter_label' htmlFor='memento_filter' className={`${draftMeta.draftStatus}`}>Memento Search</label>
-      <input id='memento_filter' name='memento_filter' value={mementoFilter} className={`${draftMeta.draftStatus}`} onChange={(e) => updateMementoFilter(e.target.value)} />
       <div id='memento_pool' className={`team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus}`}>
         {...mementoImages.filter((value) => {
           return mementoFilter ? value.props.title.toLowerCase().includes(mementoFilter.toLowerCase()) : true;

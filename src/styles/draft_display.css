@@ -12,6 +12,7 @@
 
     height: 50px;
     background: #81888f;
+    z-index: 100;
 }
 
 #draft_display.completed {

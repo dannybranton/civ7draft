@@ -4,18 +4,20 @@ import { default as Civilizations } from './Civilizations';
 interface IPicksProps {
   // civilizations: React.Component<typeof Civilizations>
   civilizations: React.ReactNode;
+  leaders: React.ReactNode;
+  mementos: React.ReactNode;
+  teamToDisplay: string;
 }
-const Picks = ({ civilizations }: IPicksProps) => {
+const Picks = ({ civilizations, leaders, mementos, teamToDisplay }: IPicksProps) => {
 
   return (
     <>
       <div id="picks_pool">
         {/* <img loading="lazy" title="ADA LOVELACE" src="https://assets.2k.com/1a6ngf98576c/7HBQeH6cuEmu6bxYShwuAK/515872ebe8564f3ca1c5a4fdf899a227/Leaders_400x240Ada-Lovelace.jpg" height="240" width="400" alt="ADA LOVELACE"></img> */}
-        <div id="team1picks">
+        <div id={`${teamToDisplay}picks`}>
           {civilizations}
-        </div>
-        <div id="team2picks">
-          {civilizations}
+          {leaders}
+          {mementos}
         </div>
       </div>
     </>
