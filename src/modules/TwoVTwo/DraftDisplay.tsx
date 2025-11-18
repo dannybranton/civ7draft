@@ -53,21 +53,21 @@ function DraftDisplay() {
     if (proposedPickBan == ''){ //when advancing stages, if no pick has been made, make one
       switch (derivedPickStage[2]) {
         case 'LEADER':
-          let numPickableLeaders = document.querySelectorAll('#leader_pool > img.pickable').length
+          let numPickableLeaders = document.querySelectorAll('.leader_pool > img.pickable').length
           let randomLeaderNum = Math.floor(Math.random() * numPickableLeaders);
-          const randomLeader = document.querySelectorAll('#leader_pool > img.pickable')[randomLeaderNum].getAttribute('id') as string;
+          const randomLeader = document.querySelectorAll('.leader_pool > img.pickable')[randomLeaderNum].getAttribute('id') as string;
           onPickBan(randomLeader, derivedTeamNumber, banning);
           break;
         case 'CIVILIZATION':
-          let numPickableCivs = document.querySelectorAll('#civ_pool > img.pickable').length
+          let numPickableCivs = document.querySelectorAll('.civ_pool > img.pickable').length
           let randomCivNum = Math.floor(Math.random() * numPickableCivs);
-          const randomCiv = document.querySelectorAll('#civ_pool > img.pickable')[randomCivNum].getAttribute('id') as string;
+          const randomCiv = document.querySelectorAll('.civ_pool > img.pickable')[randomCivNum].getAttribute('id') as string;
           onPickBan(randomCiv, derivedTeamNumber, banning);
           break;
         case 'MEMENTO':
-          let numPickableMementos = document.querySelectorAll('#memento_pool > img.pickable').length
+          let numPickableMementos = document.querySelectorAll('.memento_pool > img.pickable').length
           let randomMementoNum = Math.floor(Math.random() * numPickableMementos);
-          const randomMemento = document.querySelectorAll('#memento_pool > img.pickable')[randomMementoNum].getAttribute('id') as string;
+          const randomMemento = document.querySelectorAll('.memento_pool > img.pickable')[randomMementoNum].getAttribute('id') as string;
           onPickBan(randomMemento, derivedTeamNumber, banning);
           break;
       }

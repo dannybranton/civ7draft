@@ -36,7 +36,6 @@
   flex-direction: column;
   min-height: 100vh;
   /* border: 8px solid #213547; */
-  justify-content: center;
   padding: 48px;
   flex: 1 1 auto;
   width: 200px;
@@ -110,4 +109,8 @@
     min-width: 100px;
     max-width: 292px;
     background: #EBFAFC;
+}
+
+#the_draft > .pool {
+    justify-content: center;
 }

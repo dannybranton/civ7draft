@@ -55,7 +55,7 @@ const Civilizations = ({
 
   return (
     <>
-      <div id='civ_pool' className={`team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus}`}>
+      <div id='civ_pool' className={`civ_pool pool team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus}`}>
         <img id='achaemenidPersia' title='Achaemenid Persian' src={ achaemenidPersia } onClick={handleClick} className={getClasses('achaemenidPersia')}></img>
         <img id="aksumite" title='Aksumite' src={ aksumite } onClick={handleClick} className={getClasses('aksumite')}></img>
         <img id="assyrian" title='Assyrian' src={ assyrian } onClick={handleClick} className={getClasses('assyrian')}></img>

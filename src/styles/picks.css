@@ -28,15 +28,15 @@
 
 .picks_pool_container {
     padding: 48px;
-    flex: 0 1 280px;
-    width: 280px;
+    flex: 0 1 240px;
+    width: 240px;
     min-width: 130px;
     display: flex;
     flex-flow: column nowrap;
 }
 
 .team_color_slice {
-    height: 24px;
+    height: 20px;
     width: 100%;
 }
 .team_color_slice.team1 {
@@ -44,4 +44,12 @@
 }
 .team_color_slice.team2 {
     background: #398cd4;
+}
+
+.picks_pool.team1 .pool {
+    justify-content: flex-start;
+}
+
+.picks_pool.team2 .pool {
+    justify-content: flex-end;
 }

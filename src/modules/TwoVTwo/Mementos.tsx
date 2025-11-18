@@ -272,7 +272,7 @@ const Mementos = ({
 
   return (
     <>
-      <div id='memento_pool' className={`team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus}`}>
+      <div id='memento_pool' className={`memento_pool pool team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus}`}>
         {...mementoImages.filter((value) => {
           return mementoFilter ? value.props.title.toLowerCase().includes(mementoFilter.toLowerCase()) : true;
         })}
