@@ -221,6 +221,8 @@ function DraftDisplay() {
           setTeamName={setTeam1Name}
         />
         <div id="the_draft" className='the_draft'>
+          <button className={`draft_button lock ${draftStatus} ${proposedPickBan == '' ? '' : 'lock_in'} team-${derivedTeamNumber}`} disabled={!proposedPickBan} onClick={() => skip()}>{banning ? 'Lock in ban' : 'Lock in pick'}</button>
+          <button className={`draft_button begin ${draftStatus}`} onClick={beginDraft}>Begin draft</button>
           <Civilizations
             onPickBan={onPickBan}
             team_number={derivedTeamNumber}
@@ -304,7 +306,6 @@ function DraftDisplay() {
         <p className={`draft_completed ${draftStatus}`}>Draft completed!</p>
         <button className='draft_button format' onClick={() => viewFormatSwitch()}>{viewFormat ? 'Draft' : 'Rules'}</button>
         <button className={`draft_button skip next ${draftStatus}`} onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
-        <button className={`draft_button begin ${draftStatus}`} onClick={beginDraft}>Begin draft</button>
         <button className={`draft_button pause ${draftStatus}`} onClick={pauseDraft}>Pause</button>
         <button className={`draft_button resume ${draftStatus}`} onClick={resumeDraft}>Resume</button>
         <button className={`draft_button restart ${draftStatus}`} onClick={restartDraft}>Restart draft</button>

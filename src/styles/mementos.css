@@ -40,6 +40,7 @@
 
 .memento_pool > img.banned.housebanned {
     background-color: #81888f; /* ban color */
+    filter: grayscale(.8);
 }
 
 .memento_pool > img.team1pick {
@@ -72,6 +73,7 @@
 .filters_section {
     display: flex;
     flex-flow: column nowrap;
+    margin: 10px;
 }
 
 .filters_section:not(.MEMENTO) {
