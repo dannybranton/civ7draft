@@ -52,9 +52,6 @@
 }
 
 .draft_button.lock {
-    /* display: none; */
-    /* filter: grayscale(1);
-    cursor: not-allowed; */
     display: block;
     margin: 0 18px 8px 18px;
     width: 200px;
