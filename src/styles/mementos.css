@@ -72,6 +72,7 @@
 .filters_section {
     display: flex;
     flex-flow: column nowrap;
+    margin: 10px;
 }
 
 .filters_section:not(.MEMENTO) {

@@ -39,6 +39,7 @@
 
 .civ_pool > img.banned.housebanned {
     border-color: #81888f;
+    filter: grayscale(.8);
 }
 
 .civ_pool > img.team1pick {

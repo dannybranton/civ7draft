@@ -221,6 +221,7 @@ function DraftDisplay() {
           setTeamName={setTeam1Name}
         />
         <div id="the_draft" className='the_draft'>
+          <button className={`draft_button lock ${draftStatus} ${proposedPickBan == '' ? '' : 'lock_in'}`} onClick={() => skip()}>{banning ? 'Lock in ban' : 'Lock in pick'}</button>
           <Civilizations
             onPickBan={onPickBan}
             team_number={derivedTeamNumber}

@@ -43,6 +43,10 @@
     display: none;
 }
 
+.draft_button.lock {
+    display: none;
+}
+
 .draft_button.format {
     display: block;
 }
@@ -66,4 +70,9 @@
 
 .draft_button.skip.IN_PROGRESS {
     display: block;
+}
+
+.draft_button.lock.IN_PROGRESS.lock_in {
+    display: block;
+    margin: 0 18px 8px 18px;
 }
