@@ -93,6 +93,7 @@
 .leader_pool > img.banned.housebanned, .leader_pool > img.housebanned {
     background-color: #81888f; /* ban color */
     filter: opacity(1);
+    filter: grayscale(.8);
 }
 
 .leader_pool.COMPLETED {

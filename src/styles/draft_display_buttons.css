@@ -44,7 +44,21 @@
 }
 
 .draft_button.lock {
+    visibility: hidden;
+}
+
+.draft_button.lock.NOT_STARTED {
     display: none;
+}
+
+.draft_button.lock {
+    /* display: none; */
+    /* filter: grayscale(1);
+    cursor: not-allowed; */
+    display: block;
+    margin: 0 18px 8px 18px;
+    width: 200px;
+    align-self: flex-end;
 }
 
 .draft_button.format {
@@ -54,6 +68,10 @@
 /* When to display the action */
 .draft_button.begin.NOT_STARTED {
     display: block;
+    margin: 0 18px 8px 18px;
+    width: 200px;
+    align-self: center;
+    flex: 0 1 auto;
 }
 
 .draft_button.pause.IN_PROGRESS {
@@ -72,7 +90,10 @@
     display: block;
 }
 
-.draft_button.lock.IN_PROGRESS.lock_in {
+.draft_button.lock.lock_in {
     display: block;
+    visibility: visible;
     margin: 0 18px 8px 18px;
+    width: 200px;
+    align-self: flex-end;
 }
