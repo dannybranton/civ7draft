@@ -8,6 +8,12 @@
     display: none;
 }
 
+#the_draft > .civ_pool:not(.COMPLETED) img.team1pick:not(.proposed), #the_draft > .civ_pool:not(.COMPLETED) img.team2pick:not(.proposed), #the_draft > .civ_pool:not(.COMPLETED) img.team1ban:not(.proposed), #the_draft > .civ_pool:not(.COMPLETED) img.team2ban:not(.proposed),
+#the_draft > .leader_pool:not(.COMPLETED) img.team1pick:not(.proposed), #the_draft > .leader_pool:not(.COMPLETED) img.team2pick:not(.proposed), #the_draft > .leader_pool:not(.COMPLETED) img.team1ban:not(.proposed), #the_draft > .leader_pool:not(.COMPLETED) img.team2ban:not(.proposed),
+#the_draft > .memento_pool:not(.COMPLETED) img.team1pick:not(.proposed), #the_draft > .memento_pool:not(.COMPLETED) img.team2pick:not(.proposed), #the_draft > .memento_pool:not(.COMPLETED) img.team1ban:not(.proposed), #the_draft > .memento_pool:not(.COMPLETED) img.team2ban:not(.proposed) {
+    display: none;
+}
+
 .picks_pool {
     /* flex: 0 0 232px; */
     border: 4px solid #213547;
