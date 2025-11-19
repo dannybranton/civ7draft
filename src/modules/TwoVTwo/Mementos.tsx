@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import '../../styles/mementos.css';
 
 import type { DraftMeta, Bans, Picks } from '../../interfaces/draft/draft';
