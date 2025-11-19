@@ -1,10 +1,14 @@
 import draftphases from '../../assets/draftphase.png';
 
-function Format() {
+interface IFormatProps {
+  show: boolean;
+}
+
+const Format = ({show}: IFormatProps) => {
 
   return (
     <>
-      <div id="format">
+      <div id="format" className={!show ? 'hidden' : ''}>
         <img id="pick_order" src={draftphases} title={'Draft phases'}></img>
         <div id="rules">
           <h2>Royal Rumble</h2>
