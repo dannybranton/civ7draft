@@ -95,5 +95,16 @@
     visibility: visible;
     margin: 0 18px 8px 18px;
     width: 200px;
+}
+
+.draft_button.lock.lock_in.team-1 {
+    align-self: flex-start;
+    background: #539942;
+    color: white;
+}
+
+.draft_button.lock.lock_in.team-2 {
     align-self: flex-end;
+    background-color: #398cd4;
+    color: white;
 }
