@@ -120,9 +120,8 @@
     justify-content: center;
 }
 
-.the_draft > .civ_pool:not(.CIVILIZATION), .the_draft > .leader_pool:not(.LEADER), .the_draft > .memento_pool:not(.MEMENTO) {
+/* wonky stuff. Won't be needed if the draft_pool is no longer used for the end screen display (if team picks display is used instead) */
+.the_draft > .civ_pool.IN_PROGRESS:not(.CIVILIZATION), .the_draft > .leader_pool.IN_PROGRESS:not(.LEADER), .the_draft > .memento_pool.IN_PROGRESS:not(.MEMENTO),
+.the_draft > .civ_pool.PAUSED:not(.CIVILIZATION), .the_draft > .leader_pool.PAUSED:not(.LEADER), .the_draft > .memento_pool.PAUSED:not(.MEMENTO) {
     display: none;
 }
-/* .picks_pool .civ_pool.CIVILIZATION, .picks_pool .leader_pool.LEADER, .picks_pool .memento_pool.MEMENTO {
-    display: flex;
-} */
