@@ -220,7 +220,7 @@ function DraftDisplay() {
           draftMeta={draftMeta}
           setTeamName={setTeam1Name}
         />
-        <div id="the_draft">
+        <div id="the_draft" className='the_draft'>
           <Civilizations
             onPickBan={onPickBan}
             team_number={derivedTeamNumber}
@@ -241,10 +241,10 @@ function DraftDisplay() {
             proposedPickBan={proposedPickBan}
             draftMeta={draftMeta}
           />
-          <>
+          <div className={`filters_section ${derivedStageType}`}>
             <label id='memento_filter_label' htmlFor='memento_filter' className={`${draftMeta.draftStatus}`}>Memento Search</label>
             <input id='memento_filter' name='memento_filter' value={mementoFilter} className={`${draftMeta.draftStatus}`} onChange={(e) => updateMementoFilter(e.target.value)} />
-          </>
+          </div>
           <Mementos
             onPickBan={onPickBan}
             team_number={derivedTeamNumber}

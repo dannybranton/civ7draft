@@ -31,13 +31,13 @@
     min-height: 100vh;
 }
 
-#the_draft {
+.the_draft {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   /* border: 8px solid #213547; */
-  padding: 48px;
-  flex: 1 1 auto;
+  padding: 48px 0;
+  flex: 8 1 auto;
   width: 200px;
 }
 
@@ -101,16 +101,28 @@
 .team_names > div {
     display: flex;
     flex-flow: column nowrap;
-    margin: 0 8px;
+    margin: 8px;
     flex: 1 1 auto;
+    align-items: center;
+}
+.team_names.NOT_STARTED > div {
+    align-items: unset;
 }
 .team_names input {
     height: 20px;
     min-width: 100px;
     max-width: 292px;
     background: #EBFAFC;
+    margin-top: 4px;
 }
 
-#the_draft > .pool {
+.the_draft > .pool {
     justify-content: center;
 }
+
+.the_draft > .civ_pool:not(.CIVILIZATION), .the_draft > .leader_pool:not(.LEADER), .the_draft > .memento_pool:not(.MEMENTO) {
+    display: none;
+}
+/* .picks_pool .civ_pool.CIVILIZATION, .picks_pool .leader_pool.LEADER, .picks_pool .memento_pool.MEMENTO {
+    display: flex;
+} */

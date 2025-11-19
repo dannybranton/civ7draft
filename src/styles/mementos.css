@@ -3,7 +3,7 @@
     flex-flow: row wrap;
 }
 
-#the_draft > .memento_pool {
+.the_draft > .memento_pool {
     margin-top: 8px;
 }
 
@@ -67,6 +67,15 @@
 
 #memento_filter_label {
     margin-left: 8px;
+}
+
+.filters_section {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.filters_section:not(.MEMENTO) {
+    display: none;
 }
 
 .memento_pool.COMPLETED {

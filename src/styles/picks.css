@@ -12,23 +12,12 @@
     /* flex: 0 0 232px; */
     border: 4px solid #213547;
     flex-grow: 1;
-}
-
-.picks_pool.team1::before {
-    /* border-left: 8px solid #539942;
-    border-right: 8px solid #539942; */
-    border-top: 16px solid #539942;
-}
-
-.picks_pool.team2::before {
-    /* border-left: 8px solid #398cd4;
-    border-right: 8px solid #398cd4; */
-    border-top: 16px solid #398cd4;
+    justify-content: center;
 }
 
 .picks_pool_container {
     padding: 48px;
-    flex: 0 1 240px;
+    flex: 1 1 240px;
     width: 240px;
     min-width: 130px;
     display: flex;
@@ -52,4 +41,16 @@
 
 .picks_pool.team2 .pool {
     justify-content: flex-end;
+}
+
+.picks_pool.team1 .selectedname {
+    align-items: flex-start;
+}
+
+.picks_pool.team2 .selectedname {
+    align-items: flex-end;
+}
+
+.picks_pool img.team1pick, .picks_pool img.team2pick, .picks_pool img.banned {
+    cursor: default;
 }
