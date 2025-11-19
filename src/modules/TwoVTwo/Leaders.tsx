@@ -64,7 +64,7 @@ const Leaders = ({team_number = 0, banning = false, enablePickBans = false, onPi
 
   return (
     <>
-      <div id='leader_pool' className={`team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus}`}>
+      <div id='leader_pool' className={`leader_pool pool team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus} ${draftMeta.stageType}`}>
         <img id="ada" title="Ada Lovelace" src={ adaLogo } onClick={handleClick} className={getClasses('ada')}></img>
         <img id="amina" title="Amina" src={ aminaLogo } onClick={handleClick} className={getClasses('amina')} ></img>
         <img id="ashokaConqueror" title="Ashoka, World Conqueror" src={ ashokaConqueror } onClick={handleClick} className={getClasses('ashokaConqueror')} ></img>

@@ -1,87 +1,86 @@
-#civ_pool {
+.civ_pool {
     display: flex;
     flex-flow: row wrap;
-    margin-top: 8px;
 }
 
-#civ_pool > img {
+.civ_pool > img {
     width: 100px;
     height: 100px;
     margin: 8px;
 }
 
-#civ_pool > img:hover {
+.civ_pool > img:hover {
     border: 6px solid gray;
     box-sizing: border-box;
 }
 
-#civ_pool > img.pickable:hover {
+.civ_pool > img.pickable:hover {
     cursor: pointer;
 }
 
-#civ_pool.team-1 > img.pickable:hover {
+.civ_pool.team-1 > img.pickable:hover {
     border-color: #539942;
 }
 
-#civ_pool.team-2 > img.pickable:hover {
+.civ_pool.team-2 > img.pickable:hover {
     border-color: #398cd4; /* pick color */
 }
 
-#civ_pool.banning > img.pickable:hover {
+.civ_pool.banning > img.pickable:hover {
     border-color: #8c2942; /* ban color */
 }
 
-#civ_pool > img.banned {
+.civ_pool > img.banned {
     cursor: not-allowed;
     border: none;
     border-bottom: 16px solid #8c2942;
     box-sizing: content-box;
 }
 
-#civ_pool > img.banned.housebanned {
+.civ_pool > img.banned.housebanned {
     border-color: #81888f;
 }
 
-#civ_pool > img.team1pick {
+.civ_pool > img.team1pick {
     cursor: not-allowed;
     border: none;
     border-bottom: 16px solid #539942;
     box-sizing: content-box;
 }
 
-#civ_pool > img.team2pick {
+.civ_pool > img.team2pick {
     cursor: not-allowed;
     border: none;
     border-bottom: 16px solid #398cd4;
     box-sizing: content-box;
 }
 
-#civ_pool > img.proposed {
+.civ_pool > img.proposed {
     cursor: default;
 }
 
-#civ_pool.COMPLETED {
+.civ_pool.COMPLETED {
     justify-content: center;
 }
-#civ_pool.COMPLETED img {
+.civ_pool.COMPLETED img {
   display: none;
 }
-#civ_pool.COMPLETED img.endscreen {
+.civ_pool.COMPLETED img.endscreen {
   display: block;
 }
-#civ_pool.COMPLETED img.endscreen.team1ban {
+.civ_pool.COMPLETED img.endscreen.team1ban {
     order: 0;
     cursor: default;
 }
-#civ_pool.COMPLETED img.endscreen.team1pick {
+.civ_pool.COMPLETED img.endscreen.team1pick {
     order: 1;
     cursor: default;
 }
-#civ_pool.COMPLETED img.endscreen.team2pick {
+.civ_pool.COMPLETED img.endscreen.team2pick {
     order: 2;
     cursor: default;
 }
-#civ_pool.COMPLETED img.endscreen.team2ban {
+.civ_pool.COMPLETED img.endscreen.team2ban {
     order: 3;
     cursor: default;
 }

@@ -1,116 +1,122 @@
-#leader_pool {
+.leader_pool {
     display: flex;
     flex-flow: row wrap;
+}
+
+.leader_pool > img {
+    width: 100px;
+    height: 100px;
     margin: 8px;
 }
 
-#leader_pool > img {
-    width: 100px;
-    height: 100px;
-}
-
-#leader_pool > img:hover {
+.leader_pool > img:hover {
     background-color: #81888f;
 }
 
-#leader_pool > img#sayyida:hover {
+.leader_pool > img#sayyida:hover {
     border: 6px solid gray;
     box-sizing: border-box;
 }
 
-#leader_pool > img.pickable:hover {
+.leader_pool > img.pickable:hover {
     cursor: pointer;
 }
 
-#leader_pool.team-1 > img.pickable:hover {
+.leader_pool.team-1 > img.pickable:hover {
     background-color: #539942;
 }
 
-#leader_pool.team-2 > img.pickable:hover {
+.leader_pool.team-2 > img.pickable:hover {
     background-color: #398cd4;
 }
 
-#leader_pool.team-1 > img#sayyida.pickable:hover {
+.leader_pool.team-1 > img#sayyida.pickable:hover {
     border-color: #539942;
 }
 
-#leader_pool.team-2 > img#sayyida.pickable:hover {
+.leader_pool.team-2 > img#sayyida.pickable:hover {
     border-color: #398cd4; /* pick color */
 }
 
-#leader_pool.banning > img.pickable:hover {
+.leader_pool.banning > img.pickable:hover {
     background-color: #8c2942; /* ban color */
 }
 
-#leader_pool.banning > img#sayyida.pickable:hover {
+.leader_pool.banning > img#sayyida.pickable:hover {
     border-color: #8c2942; /* ban color */
 }
 
-#leader_pool > img.team1pick, #leader_pool > img.banned.twomilitarybanned.team1pick, #leader_pool > img.twomilitarybanned.team1pick {
+.leader_pool > img.team1pick, .leader_pool > img.banned.twomilitarybanned.team1pick, .leader_pool > img.twomilitarybanned.team1pick {
     background-color: #539942; /* ban color */
     cursor: not-allowed;
     filter: opacity(1);
 }
 
-#leader_pool > img.team2pick, #leader_pool > img.banned.twomilitarybanned.team2pick, #leader_pool > img.twomilitarybanned.team2pick {
+.leader_pool > img.team2pick, .leader_pool > img.banned.twomilitarybanned.team2pick, .leader_pool > img.twomilitarybanned.team2pick {
     background-color: #398cd4; /* ban color */
     cursor: not-allowed;
     filter: opacity(1);
 }
 
-#leader_pool > img#sayyida.team1pick {
+.leader_pool > img#sayyida.team1pick {
     border: none;
     border-bottom: 16px solid #539942;
     box-sizing: content-box;
 }
 
-#leader_pool > img#sayyida.team2pick {
+.leader_pool > img#sayyida.team2pick {
     border: none;
     border-bottom: 16px solid #398cd4;
     box-sizing: content-box;
 }
 
-#leader_pool > img.proposed {
+.leader_pool > img#sayyida.banned {
+    border: none;
+    border-bottom: 16px solid #8c2942;
+    box-sizing: content-box;
+}
+
+.leader_pool > img.proposed {
     cursor: default;
 }
 
-#leader_pool > img.banned {
+.leader_pool > img.banned {
     background-color: #8c2942; /* ban color */
     cursor: not-allowed;
 }
 
-#leader_pool > img.banned.twomilitarybanned, #leader_pool > img.twomilitarybanned {
+.leader_pool > img.banned.twomilitarybanned, .leader_pool > img.twomilitarybanned {
     background-color: #81888f; /* ban color */
     filter: opacity(0.5);
 }
 
-#leader_pool > img.banned.housebanned, #leader_pool > img.housebanned {
+.leader_pool > img.banned.housebanned, .leader_pool > img.housebanned {
     background-color: #81888f; /* ban color */
     filter: opacity(1);
 }
 
-#leader_pool.COMPLETED {
+.leader_pool.COMPLETED {
     justify-content: center;
 }
-#leader_pool.COMPLETED img {
+.leader_pool.COMPLETED img {
   display: none;
 }
-#leader_pool.COMPLETED img.endscreen {
+.leader_pool.COMPLETED img.endscreen {
   display: block;
 }
-#leader_pool.COMPLETED img.endscreen.team1ban {
+.leader_pool.COMPLETED img.endscreen.team1ban {
     order: 0;
     cursor: default;
 }
-#leader_pool.COMPLETED img.endscreen.team1pick {
+.leader_pool.COMPLETED img.endscreen.team1pick {
     order: 1;
     cursor: default;
 }
-#leader_pool.COMPLETED img.endscreen.team2pick {
+.leader_pool.COMPLETED img.endscreen.team2pick {
     order: 2;
     cursor: default;
 }
-#leader_pool.COMPLETED img.endscreen.team2ban {
+.leader_pool.COMPLETED img.endscreen.team2ban {
     order: 3;
     cursor: default;
 }

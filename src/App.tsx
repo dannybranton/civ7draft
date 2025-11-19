@@ -6,9 +6,7 @@ function App() {
 
   return (
     <>
-      <div id="the_draft">
-        <DraftDisplay />
-      </div>
+      <DraftDisplay />
     </>
   )
 }

@@ -3,3 +3,67 @@
     margin-top: auto;
     place-items: flex-end;
 }
+
+.picks_pool #team1picks img:not(.displayable), .picks_pool #team2picks img:not(.displayable) {
+    display: none;
+}
+
+.picks_pool {
+    /* flex: 0 0 232px; */
+    border: 4px solid #213547;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.picks_pool img, .picks_pool .memento_pool > img {
+    width: 80px;
+    height: 80px;
+}
+
+.picks_pool.team1 img:not(.banned) {
+    order: 2;
+}
+
+.picks_pool.team2 img.banned {
+    order: 2;
+}
+
+.picks_pool_container {
+    padding: 48px;
+    flex: 1 1 240px;
+    width: 240px;
+    min-width: 130px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.team_color_slice {
+    height: 20px;
+    width: 100%;
+}
+.team_color_slice.team1 {
+    background: #539942;
+}
+.team_color_slice.team2 {
+    background: #398cd4;
+}
+
+.picks_pool.team1 .pool {
+    justify-content: flex-start;
+}
+
+.picks_pool.team2 .pool {
+    justify-content: flex-end;
+}
+
+.picks_pool.team1 .selectedname {
+    align-items: flex-start;
+}
+
+.picks_pool.team2 .selectedname {
+    align-items: flex-end;
+}
+
+.picks_pool img.team1pick, .picks_pool img.team2pick, .picks_pool img.banned {
+    cursor: default;
+}

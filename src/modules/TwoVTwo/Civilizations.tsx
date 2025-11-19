@@ -18,7 +18,7 @@ import roman from '../../assets/Civilizations/Roman_29.webp';
 import silla from '../../assets/Civilizations/Silla_29.webp';
 import tongan from '../../assets/Civilizations/Tongan_29.webp';
 
-interface CivilizationsProps {
+export interface ICivilizationsProps {
   bans: Bans;
   enablePickBans: boolean;
   picks: Picks;
@@ -38,7 +38,7 @@ const Civilizations = ({
     picks,
     proposedPickBan,
     draftMeta
-  }: CivilizationsProps) => {
+  }: ICivilizationsProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     if (enablePickBans){
@@ -55,7 +55,7 @@ const Civilizations = ({
 
   return (
     <>
-      <div id='civ_pool' className={`team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus}`}>
+      <div id='civ_pool' className={`civ_pool pool team-${team_number} ${banning ? 'banning' : ''} ${draftMeta.draftStatus} ${draftMeta.stageType}`}>
         <img id='achaemenidPersia' title='Achaemenid Persian' src={ achaemenidPersia } onClick={handleClick} className={getClasses('achaemenidPersia')}></img>
         <img id="aksumite" title='Aksumite' src={ aksumite } onClick={handleClick} className={getClasses('aksumite')}></img>
         <img id="assyrian" title='Assyrian' src={ assyrian } onClick={handleClick} className={getClasses('assyrian')}></img>

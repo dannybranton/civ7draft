@@ -1,54 +1,58 @@
-#memento_pool {
+.memento_pool {
     display: flex;
     flex-flow: row wrap;
+}
+
+.the_draft > .memento_pool {
+    margin-top: 8px;
+}
+
+.memento_pool > img {
+    width: 100px;
+    height: 100px;
     margin: 8px;
 }
 
-#memento_pool > img {
-    width: 100px;
-    height: 100px;
-}
-
-#memento_pool > img:hover {
+.memento_pool > img:hover {
     background-color: #81888f;
 }
 
-#memento_pool > img.pickable:hover {
+.memento_pool > img.pickable:hover {
     cursor: pointer;
 }
 
-#memento_pool.team-1 > img.pickable:hover {
+.memento_pool.team-1 > img.pickable:hover {
     background-color: #539942;
 }
 
-#memento_pool.team-2 > img.pickable:hover {
+.memento_pool.team-2 > img.pickable:hover {
     background-color: #398cd4;
 }
 
-#memento_pool.banning > img.pickable:hover {
+.memento_pool.banning > img.pickable:hover {
     background-color: #8c2942; /* ban color */
 }
 
-#memento_pool > img.banned {
+.memento_pool > img.banned {
     background-color: #8c2942; /* ban color */
     cursor: not-allowed;
 }
 
-#memento_pool > img.banned.housebanned {
+.memento_pool > img.banned.housebanned {
     background-color: #81888f; /* ban color */
 }
 
-#memento_pool > img.team1pick {
+.memento_pool > img.team1pick {
     background-color: #539942; /* ban color */
     cursor: not-allowed;
 }
 
-#memento_pool > img.team2pick {
+.memento_pool > img.team2pick {
     background-color: #398cd4; /* ban color */
     cursor: not-allowed;
 }
 
-#memento_pool > img.proposed {
+.memento_pool > img.proposed {
     cursor: default;
 }
 
@@ -65,28 +69,37 @@
     margin-left: 8px;
 }
 
-#memento_pool.COMPLETED {
+.filters_section {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.filters_section:not(.MEMENTO) {
+    display: none;
+}
+
+.memento_pool.COMPLETED {
     justify-content: center;
 }
-#memento_pool.COMPLETED img, #memento_filter.COMPLETED, #memento_filter_label.COMPLETED {
+.memento_pool.COMPLETED img, #memento_filter.COMPLETED, #memento_filter_label.COMPLETED {
   display: none;
 }
-#memento_pool.COMPLETED img.endscreen {
+.memento_pool.COMPLETED img.endscreen {
   display: block;
 }
-#memento_pool.COMPLETED img.endscreen.team1ban {
+.memento_pool.COMPLETED img.endscreen.team1ban {
     order: 0;
     cursor: default;
 }
-#memento_pool.COMPLETED img.endscreen.team1pick {
+.memento_pool.COMPLETED img.endscreen.team1pick {
     order: 1;
     cursor: default;
 }
-#memento_pool.COMPLETED img.endscreen.team2pick {
+.memento_pool.COMPLETED img.endscreen.team2pick {
     order: 2;
     cursor: default;
 }
-#memento_pool.COMPLETED img.endscreen.team2ban {
+.memento_pool.COMPLETED img.endscreen.team2ban {
     order: 3;
     cursor: default;
 }

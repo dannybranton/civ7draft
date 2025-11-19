@@ -12,6 +12,7 @@
 
     height: 50px;
     background: #81888f;
+    z-index: 100;
 }
 
 #draft_display.completed {
@@ -19,9 +20,25 @@
     color: black;
 }
 
-#draft_display > input {
+#draft_sections > input {
     margin: 0 16px;
     height: 20px;
+}
+
+#draft_sections {
+    display: flex;
+    flex-flow: row nowrap;
+    min-height: 100vh;
+}
+
+.the_draft {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* border: 8px solid #213547; */
+  padding: 48px 0;
+  flex: 8 1 auto;
+  width: 200px;
 }
 
 .stage_prompt {
@@ -53,10 +70,16 @@
 #format {
     align-self: center;
     display: flex;
+    flex-flow: row wrap;
+}
+
+#format {
+    flex: 0 1 auto;
 }
 
 #format img#pick_order {
     width: 516px;
+    flex: 0 1 auto;
 }
 
 #rules {
@@ -69,4 +92,42 @@
 
 .draft_completed.COMPLETED {
     display: block;
+}
+
+.team_names.selection {
+    display: none;
+}
+.team_names.NOT_STARTED .selectedname {
+    display: none;
+}
+.team_names.NOT_STARTED {
+    display: flex;
+    flex-flow: row wrap;
+}
+.team_names > div {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 8px;
+    flex: 1 1 auto;
+    align-items: center;
+}
+.team_names.NOT_STARTED > div {
+    align-items: unset;
+}
+.team_names input {
+    height: 20px;
+    min-width: 100px;
+    max-width: 292px;
+    background: #EBFAFC;
+    margin-top: 4px;
+}
+
+.the_draft > .pool {
+    justify-content: center;
+}
+
+/* wonky stuff. Won't be needed if the draft_pool is no longer used for the end screen display (if team picks display is used instead) */
+.the_draft > .civ_pool.IN_PROGRESS:not(.CIVILIZATION), .the_draft > .leader_pool.IN_PROGRESS:not(.LEADER), .the_draft > .memento_pool.IN_PROGRESS:not(.MEMENTO),
+.the_draft > .civ_pool.PAUSED:not(.CIVILIZATION), .the_draft > .leader_pool.PAUSED:not(.LEADER), .the_draft > .memento_pool.PAUSED:not(.MEMENTO) {
+    display: none;
 }

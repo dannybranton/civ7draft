@@ -1,13 +1,13 @@
 export interface Bans {
-  houseBans: string[];
-  draftBans: string[];
-  team1Bans: string[];
-  team2Bans: string[];
+  houseBans?: string[];
+  draftBans?: string[];
+  team1Bans?: string[];
+  team2Bans?: string[];
 }
 
 export interface Picks {
-  team1Picks: string[];
-  team2Picks: string[];
+  team1Picks?: string[];
+  team2Picks?: string[];
 }
 
 export type COMPLETED = 'COMPLETED'

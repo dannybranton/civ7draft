@@ -12,6 +12,7 @@ import type { Bans, DraftMeta, PROGRESS_STATUS, STAGE_SELECTION_TYPE } from '../
 import { HOUSE_BANS, DEFAULT_TOTAL_TIME_FOR_PICK } from '../../utilities/draft/constants';
 import { getPickOrder, getRandomInt } from '../../utilities/draft/pickorder';
 import { getTotalTimeForPickBan } from '../../utilities/draft/draft';
+import Picks from './Picks';
 
 function DraftDisplay() {
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TOTAL_TIME_FOR_PICK); //Time in seconds
@@ -40,6 +41,8 @@ function DraftDisplay() {
   const draftMeta: DraftMeta = { draftStatus, proposedPickBan, stageType: derivedStageType };
   const banning: boolean = derivedStage.includes('ban');
 
+  const [mementoFilter, updateMementoFilter] = useState('');
+
   const beginDraft = () => {
     setDraftStatus("IN_PROGRESS");
     setViewFormat(false);
@@ -47,25 +50,24 @@ function DraftDisplay() {
   }
 
   const nextStage = () => {
-    
     if (proposedPickBan == ''){ //when advancing stages, if no pick has been made, make one
       switch (derivedPickStage[2]) {
         case 'LEADER':
-          let numPickableLeaders = document.querySelectorAll('#leader_pool > img.pickable').length
+          let numPickableLeaders = document.querySelectorAll('.leader_pool > img.pickable').length
           let randomLeaderNum = Math.floor(Math.random() * numPickableLeaders);
-          const randomLeader = document.querySelectorAll('#leader_pool > img.pickable')[randomLeaderNum].getAttribute('id') as string;
+          const randomLeader = document.querySelectorAll('.leader_pool > img.pickable')[randomLeaderNum].getAttribute('id') as string;
           onPickBan(randomLeader, derivedTeamNumber, banning);
           break;
         case 'CIVILIZATION':
-          let numPickableCivs = document.querySelectorAll('#civ_pool > img.pickable').length
+          let numPickableCivs = document.querySelectorAll('.civ_pool > img.pickable').length
           let randomCivNum = Math.floor(Math.random() * numPickableCivs);
-          const randomCiv = document.querySelectorAll('#civ_pool > img.pickable')[randomCivNum].getAttribute('id') as string;
+          const randomCiv = document.querySelectorAll('.civ_pool > img.pickable')[randomCivNum].getAttribute('id') as string;
           onPickBan(randomCiv, derivedTeamNumber, banning);
           break;
         case 'MEMENTO':
-          let numPickableMementos = document.querySelectorAll('#memento_pool > img.pickable').length
+          let numPickableMementos = document.querySelectorAll('.memento_pool > img.pickable').length
           let randomMementoNum = Math.floor(Math.random() * numPickableMementos);
-          const randomMemento = document.querySelectorAll('#memento_pool > img.pickable')[randomMementoNum].getAttribute('id') as string;
+          const randomMemento = document.querySelectorAll('.memento_pool > img.pickable')[randomMementoNum].getAttribute('id') as string;
           onPickBan(randomMemento, derivedTeamNumber, banning);
           break;
       }
@@ -181,57 +183,131 @@ function DraftDisplay() {
     <>
       
       {viewFormat ? <Format /> :
-      <>
-        <Civilizations
-          onPickBan={onPickBan}
-          team_number={derivedTeamNumber}
-          banning={derivedStage.includes('ban')}
-          enablePickBans={derivedPickStage[2] == 'CIVILIZATION'}
-          bans={bans}
-          picks={{team1Picks, team2Picks}}
-          proposedPickBan={proposedPickBan}
+      <div id="draft_sections">
+        <Picks
+          civilizations={<Civilizations
+            onPickBan={onPickBan}
+            team_number={derivedTeamNumber}
+            banning={derivedStage.includes('ban')}
+            enablePickBans={derivedPickStage[2] == 'CIVILIZATION'}
+            bans={{team1Bans, draftBans: team1Bans}}
+            picks={{team1Picks}}
+            proposedPickBan={proposedPickBan}
+            draftMeta={draftMeta}
+          />}
+          leaders={<Leaders
+            onPickBan={onPickBan}
+            team_number={derivedTeamNumber}
+            banning={derivedStage.includes('ban')}
+            enablePickBans={derivedPickStage[2] == 'LEADER'}
+            bans={{team1Bans, draftBans: team1Bans}}
+            picks={{team1Picks}}
+            proposedPickBan={proposedPickBan}
+            draftMeta={draftMeta}
+          />}
+          mementos={<Mementos
+            onPickBan={onPickBan}
+            team_number={derivedTeamNumber}
+            banning={derivedStage.includes('ban')}
+            enablePickBans={derivedPickStage[2] == 'MEMENTO'}
+            bans={{team1Bans, draftBans: team1Bans}}
+            picks={{team1Picks}}
+            proposedPickBan={proposedPickBan}
+            draftMeta={draftMeta}
+          />}
+          teamToDisplay={'team1'}
+          teamName={team1Name}
           draftMeta={draftMeta}
+          setTeamName={setTeam1Name}
         />
-        <Leaders
-          onPickBan={onPickBan}
-          team_number={derivedTeamNumber}
-          banning={derivedStage.includes('ban')}
-          enablePickBans={derivedPickStage[2] == 'LEADER'}
-          bans={bans}
-          picks={{team1Picks, team2Picks}}
-          proposedPickBan={proposedPickBan}
+        <div id="the_draft" className='the_draft'>
+          <Civilizations
+            onPickBan={onPickBan}
+            team_number={derivedTeamNumber}
+            banning={derivedStage.includes('ban')}
+            enablePickBans={derivedPickStage[2] == 'CIVILIZATION'}
+            bans={bans}
+            picks={{team1Picks, team2Picks}}
+            proposedPickBan={proposedPickBan}
+            draftMeta={draftMeta}
+          />
+          <Leaders
+            onPickBan={onPickBan}
+            team_number={derivedTeamNumber}
+            banning={derivedStage.includes('ban')}
+            enablePickBans={derivedPickStage[2] == 'LEADER'}
+            bans={bans}
+            picks={{team1Picks, team2Picks}}
+            proposedPickBan={proposedPickBan}
+            draftMeta={draftMeta}
+          />
+          <div className={`filters_section ${derivedStageType}`}>
+            <label id='memento_filter_label' htmlFor='memento_filter' className={`${draftMeta.draftStatus}`}>Memento Search</label>
+            <input id='memento_filter' name='memento_filter' value={mementoFilter} className={`${draftMeta.draftStatus}`} onChange={(e) => updateMementoFilter(e.target.value)} />
+          </div>
+          <Mementos
+            onPickBan={onPickBan}
+            team_number={derivedTeamNumber}
+            banning={derivedStage.includes('ban')}
+            enablePickBans={derivedPickStage[2] == 'MEMENTO'}
+            bans={bans}
+            picks={{team1Picks, team2Picks}}
+            proposedPickBan={proposedPickBan}
+            draftMeta={draftMeta}
+            mementoFilter={mementoFilter}
+          />
+        </div>
+        <Picks
+          civilizations={<Civilizations
+            onPickBan={onPickBan}
+            team_number={derivedTeamNumber}
+            banning={derivedStage.includes('ban')}
+            enablePickBans={derivedPickStage[2] == 'CIVILIZATION'}
+            bans={{team2Bans, draftBans: team2Bans}}
+            picks={{team2Picks}}
+            proposedPickBan={proposedPickBan}
+            draftMeta={draftMeta}
+          />}
+          leaders={<Leaders
+            onPickBan={onPickBan}
+            team_number={derivedTeamNumber}
+            banning={derivedStage.includes('ban')}
+            enablePickBans={derivedPickStage[2] == 'LEADER'}
+            bans={{team2Bans, draftBans: team2Bans}}
+            picks={{team2Picks}}
+            proposedPickBan={proposedPickBan}
+            draftMeta={draftMeta}
+          />}
+          mementos={<Mementos
+            onPickBan={onPickBan}
+            team_number={derivedTeamNumber}
+            banning={derivedStage.includes('ban')}
+            enablePickBans={derivedPickStage[2] == 'MEMENTO'}
+            bans={{team2Bans, draftBans: team2Bans}}
+            picks={{team2Picks}}
+            proposedPickBan={proposedPickBan}
+            draftMeta={draftMeta}
+          />}
+          teamToDisplay={'team2'}
+          teamName={team2Name}
           draftMeta={draftMeta}
+          setTeamName={setTeam2Name}
         />
-        <Mementos
-          onPickBan={onPickBan}
-          team_number={derivedTeamNumber}
-          banning={derivedStage.includes('ban')}
-          enablePickBans={derivedPickStage[2] == 'MEMENTO'}
-          bans={bans}
-          picks={{team1Picks, team2Picks}}
-          proposedPickBan={proposedPickBan}
-          draftMeta={draftMeta}
-        />
-      </>
+      </div>
       }
       <div id="draft_display" className={`${draftStatus == 'COMPLETED' ? 'completed' : ''}`}>
+        
         <div className={`stage_prompt team-${derivedTeamNumber} ${draftStatus}`}>
           <p>{derivedStage}</p>
           <p className='timer'>{timeRemaining}</p>
         </div>
         <p className={`draft_completed ${draftStatus}`}>Draft completed!</p>
         <button className='draft_button format' onClick={() => viewFormatSwitch()}>{viewFormat ? 'Draft' : 'Rules'}</button>
-        {(draftStatus == 'NOT_STARTED') &&
-          <input id='team1_name' value={team1Name} onChange={(e) => setTeam1Name(e.target.value)} />
-        }
         <button className={`draft_button skip next ${draftStatus}`} onClick={() => skip()}>{proposedPickBan == '' ? 'Skip' : 'Next'}</button>
         <button className={`draft_button begin ${draftStatus}`} onClick={beginDraft}>Begin draft</button>
         <button className={`draft_button pause ${draftStatus}`} onClick={pauseDraft}>Pause</button>
         <button className={`draft_button resume ${draftStatus}`} onClick={resumeDraft}>Resume</button>
         <button className={`draft_button restart ${draftStatus}`} onClick={restartDraft}>Restart draft</button>
-        {(draftStatus == 'NOT_STARTED') &&
-          <input id='team2_name' value={team2Name} onChange={(e) => setTeam2Name(e.target.value)} />
-        }
       </div>
       {/* <div>Picks Team1: {team1Picks.join(',')}</div>
       <div>Bans: {team1Bans.join(',')} {team2Bans.join(',')}</div>
