@@ -76,6 +76,7 @@ function DraftDisplay() {
       setCurrentStage(currentStage + 1);
       setTimeRemaining(getTotalTimeForPickBan(draftMeta, banning));
       setProposedPickBan('');
+      updateMementoFilter('');
     } else {
       setDraftStatus("COMPLETED");
       setCurrentStage(0);
