@@ -70,10 +70,16 @@
 #format {
     align-self: center;
     display: flex;
+    flex-flow: row wrap;
+}
+
+#format {
+    flex: 0 1 auto;
 }
 
 #format img#pick_order {
     width: 516px;
+    flex: 0 1 auto;
 }
 
 #rules {
