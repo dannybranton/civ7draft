@@ -70,6 +70,12 @@
     box-sizing: content-box;
 }
 
+.leader_pool > img#sayyida.banned {
+    border: none;
+    border-bottom: 16px solid #8c2942;
+    box-sizing: content-box;
+}
+
 .leader_pool > img.proposed {
     cursor: default;
 }
